@@ -1,0 +1,13 @@
+# Vagrant & Docker
+.cache
+.docker
+.vagrant
+
+# Shell
+.bash_history
+.bash_profile
+.profile
+.DS_Store
+
+# Dont store credentials
+.env
