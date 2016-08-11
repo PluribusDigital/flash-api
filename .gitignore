@@ -5,8 +5,6 @@
 
 # Shell
 .bash_history
-.bash_profile
-.profile
 .DS_Store
 
 # Dont store credentials

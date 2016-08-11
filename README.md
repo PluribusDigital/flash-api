@@ -8,12 +8,19 @@ DHS Flash Technical Challenge
   * `vagrant plugin install vagrant-vbguest`
 
 ## Installation
+##### Establish local secrets
+```shell
+copy .env.example .env
+```
+
+Use your favorite editor to update the values in `.env`
+
 ##### Build the box
 ```shell
 vagrant up
 ```
 ##### Verify Installation
-_TBD_
+* The PostgreSQL database should be available at 
 
 ## Development
 _TBD_
