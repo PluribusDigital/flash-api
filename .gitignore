@@ -1,3 +1,6 @@
+# Ignore package directories
+node_modules
+
 # Vagrant & Docker
 .cache
 .docker

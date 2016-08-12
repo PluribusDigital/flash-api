@@ -1,0 +1,20 @@
+{
+  "name": "flash-api",
+  "version": "0.0.0",
+  "description": "API for DHS FLASH Prototype",
+  "repository": "https://github.com/STSILABS/flash-api",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "supervisor .",
+    "test": "echo TODO"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "~4.13.4",
+    "pg": "^6.1.0"
+  },
+  "devDependencies": {
+    "supervisor": "^0.11.0"
+  }
+}
