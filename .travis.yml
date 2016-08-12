@@ -7,7 +7,7 @@ node_js:
   - "iojs"
 
 # command to install dependencies
-install: npm install
+install: cd api && npm install
 
 # command to run tests
-script: npm test
+script: echo TODO
