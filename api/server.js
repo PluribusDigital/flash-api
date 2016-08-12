@@ -27,3 +27,9 @@ app.use('/api/item', endpItem);
 // =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
+
+// Catch SIGINT in docker
+// https://github.com/nodejs/node/issues/4182
+process.on('SIGINT', function() {
+    process.exit();
+});

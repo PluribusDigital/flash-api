@@ -32,11 +32,12 @@ Vagrant.configure(2) do |config|
   config.vm.provision "docker"
 
   # Update helper files
-  config.vm.provision "shell", inline: "chmod 554 #{container_root}/db/bot.sh"
+  config.vm.provision "shell", inline: "chmod 774 #{container_root}/api/bot.sh"
+  config.vm.provision "shell", inline: "chmod 774 #{container_root}/db/bot.sh"
 
-  # Build and run the database container
-  config.vm.provision "shell" do |s|
-    s.inline = "cd #{container_root}/db && ./bot.sh build && ./bot.sh run-bg"
-  end
- 
+  # Build the DB container
+  config.vm.provision "shell", inline: "cd #{container_root}/db && ./bot.sh build"
+
+  # Make sure the database server is running
+  config.vm.provision "shell", inline: "cd #{container_root}/db && ./bot.sh run-bg", run: "always" 
 end

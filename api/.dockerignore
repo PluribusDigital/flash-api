@@ -1,0 +1,6 @@
+# build packages localy
+node_modules
+
+# Yo dawg I herd you don't like Docker in your Docker
+Dockerfile
+bot.sh

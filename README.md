@@ -20,7 +20,7 @@ Use your favorite editor to update the values in `.env`
 vagrant up
 ```
 ##### Verify Installation
-* The PostgreSQL database should be available at 
+* The PostgreSQL database should be available at `192.168.50.10:5432`
 
 ## Development
 _TBD_

@@ -5,14 +5,12 @@
 
 # -----------------------------------------------------------------------------
 
-image_name=flash-api-db
+image_name=flash-api
 docker_tag="stsilabs/$image_name"
-db_data_dir=/var/lib/postgresql/flash-data
 
 # -----------------------------------------------------------------------------
 
 build() {
-    sudo rm -rf "$db_data_dir"
     docker build -t "$docker_tag" .
 }
 
@@ -21,21 +19,21 @@ clean() {
 }
 
 run() {
-    docker run -it -p "5432:5432" \
-    -v "$db_data_dir:/var/lib/postgresql/data" \
+    docker run -it -p "8080:8080" \
     --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
 }
 
 run-bg() {
-    docker run -d -p "5432:5432" \
-    -v "$db_data_dir:/var/lib/postgresql/data" \
+    docker run -d -p "8080:8080" \
     --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
 }
 
 run-test() {
-    exit 2
+    docker run -it -p "8080:8080" \
+    --env-file /home/vagrant/.env \
+    --name "$image_name" "$docker_tag" npm test
 }
 
 push() {
@@ -54,20 +52,27 @@ case $1 in
         build
         ;;
     run)
+        clean
+        build && \
         run && \
         stop
         ;;
     run-bg)
-        stop
+        clean
+        build && \
         run-bg
         ;;
     push)
+        clean
+        build && \
         push
         ;;
     stop)
         stop
         ;;
     test)
+        clean
+        build && \
         run-test && \
         stop
         ;;
