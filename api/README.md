@@ -3,7 +3,7 @@
 Before developing, make sure the [database server](../db/README.md) is running
 
 ## DockerBot
-`bot.sh` helps manage the lifecycle of the database image
+`bot.sh` helps manage the lifecycle of the docker image
 
 |command|description|
 |---|---|
