@@ -19,8 +19,27 @@ Use your favorite editor to update the values in `.env`
 ```shell
 vagrant up
 ```
-##### Verify Installation
+
+##### Verify Installation (DB)
 * The PostgreSQL database should be available at `192.168.50.10:5432`
 
+##### Verify Installation (API)
+```shell
+# Start the http server
+host> vagrant ssh
+guest> cd api && ./bot.sh run
+```
+* The Sample endpoint should be available at `http://192.168.50.10:8080/api/item/`
+
+```shell
+# Stop the http server
+guest> ^C
+guest> exit
+host>
+```
+
 ## Development
-_TBD_
+There are two areas being developed in this repository.  The development guidance for each is located in the root of the subdirectory.
+
+* [Database](db/README.md)
+* [API](api/README.md)
