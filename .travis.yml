@@ -6,4 +6,4 @@ node_js:
 install: cd api && npm install
 
 # command to run tests
-script: cd api && npm test
+script: npm test
