@@ -30,7 +30,7 @@ describe('UserListController Tests', function() {
     });
 
     it('should call res.status() with 200', function(done) {
-        userListController.get(req, res, next);
+      userListController.get(req, res, next);
 
       expect(res.status.calledWith(200)).to.equal(true);
       done();

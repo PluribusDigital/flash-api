@@ -10,13 +10,14 @@
     "test-coverage": "npm test && istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
     "install-local": "npm install -g mocha & npm install -g node-inspector & npm install",
     "start": "supervisor -- server.js 1 prod 127.0.0.1 3000 8080",
-    "debug": "node-debug server.js 0 dev 127.0.0.1 3000 8080"
+    "debug": "node debug server.js 0 dev 127.0.0.1 3000 8080"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cluster-service": "^1.0.6",
     "express": "~4.13.4",
-    "pg": "^6.1.0",
-    "cluster-service": "^1.0.6"
+    "lodash": "^4.15.0",
+    "pg": "^6.1.0"
   },
   "devDependencies": {
     "supervisor": "^0.11.0",
