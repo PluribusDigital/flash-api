@@ -12,11 +12,6 @@ The structure of the application is based on the output of express-rest-api gene
 
 You can use the generator to create new controllers, repositories and services and this will create the boilerplate code for the controller, repository or service along with boilerplate code for unit tests and in the case of controllers will add an entry in the route configuration for that controller.
 
-In order to utilize the generator you will need to install Yeoman first.
-
-### Installing Yeoman
-http://yeoman.io/learning/index.html
-
 ### Scaffolding Controller, Controller Test, and Updates Route Config
 `> yo express-rest-api:controller`
 
