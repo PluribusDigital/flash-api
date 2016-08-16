@@ -29,10 +29,13 @@ function configureRoutes(application) {
 }
 
 function startServer(application) {
-  var server = http.createServer(application);
+  application.listen(settingsConfig.settings.workerPort);
+  console.log('Magic happens on port ' + settingsConfig.settings.workerPort);
 
-  server.listen(settingsConfig.settings.workerPort, settingsConfig.settings.hostName, settingsConfig.settings.queueLength, function() {
-    console.log('listening at http://%s:%s', settingsConfig.settings.hostName, settingsConfig.settings.workerPort);
+  // Catch SIGINT in docker
+  // https://github.com/nodejs/node/issues/4182
+  process.on('SIGINT', function() {
+      process.exit();
   });
 }
 
