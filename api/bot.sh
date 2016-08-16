@@ -20,19 +20,16 @@ clean() {
 
 run() {
     docker run -it -p "8080:8080" \
-    --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
 }
 
 run-bg() {
     docker run -d -p "8080:8080" \
-    --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
 }
 
 run-test() {
     docker run -it -p "8080:8080" \
-    --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag" npm test
 }
 
