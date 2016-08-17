@@ -27,6 +27,7 @@ vagrant up
 ```shell
 # Start the http server
 host> vagrant ssh
+# password is 'vagrant'
 guest> cd api && ./bot.sh run
 ```
 * The Sample endpoint should be available at `http://192.168.50.10:8080/api/item/`
