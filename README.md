@@ -44,3 +44,8 @@ There are two areas being developed in this repository.  The development guidanc
 
 * [Database](db/README.md)
 * [API](api/README.md)
+
+## Database
+If you want to connect via PGAdmin, here are example connection settings.
+![PG Admin Configuration](/docs/pgAdminConfig.png?raw=true "PGAdmin Configuration")
+
