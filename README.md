@@ -10,7 +10,7 @@ DHS Flash Technical Challenge
 ## Installation
 ##### Establish local secrets
 ```shell
-copy .env.example .env
+cp .env.example .env
 ```
 
 Use your favorite editor to update the values in `.env`
