@@ -12,3 +12,6 @@ node_modules
 
 # Dont store credentials
 .env
+
+# Other
+.viminfo
