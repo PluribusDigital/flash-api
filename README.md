@@ -10,7 +10,7 @@ DHS Flash Technical Challenge
 ## Installation
 ##### Establish local secrets
 ```shell
-copy .env.example .env
+cp .env.example .env
 ```
 
 Use your favorite editor to update the values in `.env`
@@ -27,6 +27,7 @@ vagrant up
 ```shell
 # Start the http server
 host> vagrant ssh
+# password is 'vagrant'
 guest> cd api && ./bot.sh run
 ```
 * The Sample endpoint should be available at `http://192.168.50.10:8080/api/item/`
@@ -43,3 +44,8 @@ There are two areas being developed in this repository.  The development guidanc
 
 * [Database](db/README.md)
 * [API](api/README.md)
+
+## Database
+If you want to connect via PGAdmin, here are example connection settings.
+![PG Admin Configuration](/docs/pgAdminConfig.png?raw=true "PGAdmin Configuration")
+
