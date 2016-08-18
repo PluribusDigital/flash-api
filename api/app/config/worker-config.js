@@ -4,6 +4,7 @@ var application = express();
 var bodyParser = require('body-parser');
 var routeConfig = require('./route-config');
 var settingsConfig = require('./settings/settings-config');
+var authority = require('./authority');
 
 function configureWorker(application) {
   configureApplication(application);
@@ -22,6 +23,9 @@ function configureApplication(application) {
     res.type('application/json');
     next();
   });
+
+  // Intercept all routes to check for API Key
+  application.all('*', authority.checkForKey);
 }
 
 function configureRoutes(application) {

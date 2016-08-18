@@ -70,7 +70,7 @@ case $1 in
     test)
         clean
         build && \
-        run-test && \
+        run-test
         stop
         ;;
     *)
