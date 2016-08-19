@@ -4,19 +4,10 @@ var db = require('../../config/db-config');
 function UserRepository() {
 }
 
-var userList = [
-  {
-    id: 1,
-    name: "Jon Minter"
-  },
-  {
-    id: 2,
-    name: "Trey White"
-  }
-];
-
-function getUserList() {
-  return userList;
+function getUserList(callback) {
+  db.pool.query('SELECT username, name, title, organization, department from users', function (err, result) {
+    callback(result.rows);
+  });
 }
 
 function getUser(id) {

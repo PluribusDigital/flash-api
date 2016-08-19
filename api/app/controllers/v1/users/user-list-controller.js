@@ -4,9 +4,17 @@ function UserListController() {
 }
 
 function get(req, res, next) {
-  var userList = this.userListService_.lookupUserList();
-
-  res.status(200).json(userList);
+  this.userListService_.lookupUserList(function(userList) {
+    var response = {
+        meta: {
+          params: {},
+          user: "TBD",
+          date: new Date()
+        },
+        data: userList
+    }
+    res.status(200).json(response);
+  });
 }
 
 UserListController.prototype = {
