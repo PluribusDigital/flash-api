@@ -13,5 +13,8 @@ node_modules
 # Dont store credentials
 .env
 
-# Other
+# Configuration files
+/api/app/config/db-config.js
+
+# IDE Specific Ignores
 .viminfo

@@ -32,3 +32,20 @@ You can use the generator to create new controllers, repositories and services a
 |`push`| pushes the current image to [Dockerhub](https://hub.docker.com/r/stsilabs/) |
 |`stop`| stops the api server container |
 |`test`| (_not implemented_) tests the api |
+
+
+## API Application configuration
+
+There are a few areas of the API Application that require configuration and customization based on the setup of the environment that is being deployed to.
+
+### PostgreSQL DB configuration
+
+To configure the database connection values, run the following commands (These commands are specific to Mac/Linux systems... For Windows systems, use appropriate Windows equivalents):
+
+```
+cd ./config
+cp ./db-config.js.example ./db-config.js
+vi ./db-config.js
+```
+
+Ensure that the proper database username and password are updated

@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var db = require('../../config/db-config');
 
 function UserRepository() {
 }
