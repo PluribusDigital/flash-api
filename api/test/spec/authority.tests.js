@@ -1,6 +1,16 @@
-var api_config = require('../../app/config/api-config.js');
+var proxyquire = require('proxyquire').noCallThru();
 
 describe('Authentication', function() {
+
+  // --------------------------------------------------------------------------
+  // Mocks
+
+  var apiConfigMocks = {
+    checkForKey: function(key) { return key == 'BAR'; }
+  };
+
+  // --------------------------------------------------------------------------
+  // Setup
 
   var target;
   var req;
@@ -14,8 +24,13 @@ describe('Authentication', function() {
 
     sinon.spy(res, "status");
 
-    target = require('../../app/config/authority');
+    target = proxyquire('../../app/config/authority', {
+      './api-config': apiConfigMocks
+    });
   });
+
+  // --------------------------------------------------------------------------
+  // Tests
 
   describe('API KEY', function() {
 
@@ -35,15 +50,11 @@ describe('Authentication', function() {
     });
 
     it('allows the url through with a valid API KEY', function(done) {
-      req.query.api_key = api_config.getValidKey();
+      req.query.api_key = 'BAR';
 
-      // In this case there are NO valid keys
-      if(req.query.api_key !== false) {
-        target.checkForKey(req, res, next);
-        expect(res.status.callCount).to.equal(0);
-        expect(next.callCount).to.equal(1);
-      }
-
+      target.checkForKey(req, res, next);
+      expect(next.callCount).to.equal(1);
+      expect(res.status.callCount).to.equal(0);
       done();
     });
   });
