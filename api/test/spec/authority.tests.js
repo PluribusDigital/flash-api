@@ -1,3 +1,4 @@
+var api_config = require('../../app/config/api-config.js');
 
 describe('Authentication', function() {
 
@@ -34,10 +35,15 @@ describe('Authentication', function() {
     });
 
     it('allows the url through with a valid API KEY', function(done) {
-      req.query.api_key = 'QWERTY';
-      target.checkForKey(req, res, next);
-      expect(res.status.callCount).to.equal(0);
-      expect(next.callCount).to.equal(1);
+      req.query.api_key = api_config.getValidKey();
+
+      // In this case there are NO valid keys
+      if(req.query.api_key !== false) {
+        target.checkForKey(req, res, next);
+        expect(res.status.callCount).to.equal(0);
+        expect(next.callCount).to.equal(1);
+      }
+
       done();
     });
   });

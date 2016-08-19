@@ -49,3 +49,15 @@ vi ./db-config.js
 ```
 
 Ensure that the proper database username and password are updated
+
+### API configuration
+
+To configure the api security values, run the following commands (These commands are specific to Mac/Linux systems... For Windows systems, use appropriate Windows equivalents):
+
+```
+cd ./config
+cp ./api-config.js.example ./api-config.js
+vi ./api-config.js
+```
+
+Ensure that the proper API keys are added to the `valid_keys` array
