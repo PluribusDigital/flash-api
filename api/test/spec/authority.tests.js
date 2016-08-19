@@ -16,7 +16,7 @@ describe('Authentication', function() {
     target = require('../../app/config/authority');
   });
 
-  describe.only('API KEY', function() {
+  describe('API KEY', function() {
 
     it('rejects the url with a missing API KEY', function(done) {
       target.checkForKey(req, res, next);
