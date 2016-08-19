@@ -1,13 +1,13 @@
+var api_config = require('./api-config');
+
 function Authority() {
 }
 
 function checkForKey(req, res, next) {
   if( req.query.api_key == undefined ) {
-    res.status(401).send('You must provide an API Key before accessing our service.  More information can be found at http://example.org/foo/bar');
+    res.status(401).send('You must provide an API Key before accessing our service.');
   }
-
-  // A stub, obvs
-  else if( req.query.api_key !== 'QWERTY' ) {
+  else if(!api_config.checkForKey(req.query.api_key)) {
     res.status(401).send('Unrecognized key');
   }
   else {

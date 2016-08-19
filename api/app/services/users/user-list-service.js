@@ -2,8 +2,8 @@ function UserListService() {
     this.userRepository_ = require('../../repositories/users/user-repository');
 }
 
-function lookupUserList() {
-    return this.userRepository_.getUserList();
+function lookupUserList(callback) {
+    return this.userRepository_.getUserList(callback);
 }
 
 UserListService.prototype = {
