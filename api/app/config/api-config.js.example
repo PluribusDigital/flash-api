@@ -1,0 +1,19 @@
+function APIConfig() {
+}
+
+function checkForKey(key) {
+  // All Valid keys should be added to the array below
+  var valid_keys = [
+    // Insert keys here, ex: '<INSERT KEY HERE>'
+  ];
+
+  return (valid_keys.indexOf(key) > -1)
+}
+
+APIConfig.prototype = {
+  checkForKey = checkForKey
+};
+
+var api_config = new APIConfig();
+
+module.exports = api_config;

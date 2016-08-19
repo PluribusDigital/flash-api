@@ -14,6 +14,7 @@ node_modules
 .env
 
 # Configuration files
+/api/app/config/api-config.js
 /api/app/config/db-config.js
 
 # IDE Specific Ignores
