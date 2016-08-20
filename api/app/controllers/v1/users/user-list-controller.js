@@ -1,6 +1,6 @@
 
 function UserListController() {
-  this.userListService_ = require('../../../services/users/user-list-service');
+  this.userListService_ = require('../../../services/users/users-service');
 }
 
 function get(req, res, next) {
