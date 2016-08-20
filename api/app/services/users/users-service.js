@@ -6,8 +6,13 @@ function lookupUserList(callback) {
     return this.userRepository_.getUserList(callback);
 }
 
+function lookupUser(username, callback) {
+    return this.userRepository_.getUser(username, callback);
+}
+
 UserListService.prototype = {
-    lookupUserList : lookupUserList
+    lookupUserList: lookupUserList,
+    lookupUser: lookupUser
 };
 
 var userListService = new UserListService();

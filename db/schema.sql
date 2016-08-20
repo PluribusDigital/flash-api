@@ -1,7 +1,6 @@
 
 CREATE TABLE users (
-  id        SERIAL  PRIMARY KEY,
-  username  VARCHAR(32) not null,
+  username  VARCHAR(32) PRIMARY KEY,
   name      VARCHAR(64) not null,
   title     VARCHAR(64) not null,
   organization VARCHAR(64) not null,

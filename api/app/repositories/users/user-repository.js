@@ -5,17 +5,15 @@ function UserRepository() {
 }
 
 function getUserList(callback) {
-  db.pool.query('SELECT username, name, title, organization, department from users', function (err, result) {
+  db.pool.query('SELECT * from users', function (err, result) {
     callback(result.rows);
   });
 }
 
-function getUser(id) {
-  var user = _.filter(userList, ['id', id]);
-  if (user.length > 0) {
-    return user[0];
-  }
-  return null;
+function getUser(username, callback) {
+  db.pool.query('SELECT * from users WHERE username = \'' + username + '\'', function (err, result) {
+    callback(result.rows[0])
+  });
 }
 
 UserRepository.prototype = {
