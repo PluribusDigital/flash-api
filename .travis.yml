@@ -3,7 +3,10 @@ node_js:
   - "5.11"
 
 # command to install dependencies
-install: cd api && npm install
+install: 
+  - cp api/app/config/db-config.js.example api/app/config/db-config.js
+  - cp api/app/config/api-config.js.example api/app/config/api-config.js
+  - cd api && npm install
 
 # command to run tests
 script: npm test
