@@ -10,7 +10,7 @@ node_modules
 .bash_history
 .DS_Store
 
-# Dont store credentials
+# Don/t store credentials
 .env
 
 # Configuration files
@@ -19,3 +19,6 @@ node_modules
 
 # IDE Specific Ignores
 .viminfo
+
+# Log Files
+npm-debug.log
