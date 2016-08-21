@@ -10,7 +10,7 @@ describe('UserRepository Tests', function() {
       query: function(string, fn) {
         var data = {
           rows: [{
-            id: 1, 
+            id: 1,
             name: "Jon Minter"
         }]};
 
@@ -34,7 +34,7 @@ describe('UserRepository Tests', function() {
   describe('getUserData()', function() {
 
     it('should get a list of users', function(done) {
-      userRepository.getUserList(function(users) {
+      userRepository.getUserList(true, function(users) {
         expect(users.length).to.be.greaterThan(0);
         done();
       });

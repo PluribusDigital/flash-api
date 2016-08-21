@@ -4,16 +4,26 @@ var db = require('../../config/db-config');
 function UserRepository() {
 }
 
-function getUserList(callback) {
-  db.pool.query('SELECT * from users', function (err, result) {
+function getUserList(apiRepresentation, callback) {
+  db.pool.query('SELECT ' + params(apiRepresentation) + ' FROM users', function (err, result) {
     callback(result.rows);
   });
 }
 
-function getUser(username, callback) {
-  db.pool.query('SELECT * from users WHERE username = \'' + username + '\'', function (err, result) {
+function getUser(username, apiRepresentation, callback) {
+  db.pool.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = \'' + username + '\'', function (err, result) {
     callback(result.rows[0])
   });
+}
+
+function params(apiRepresentation) {
+  var retVal = "*";
+
+  if(apiRepresentation) {
+      retVal = "username, name, title, organization, department";
+  }
+
+  return retVal;
 }
 
 UserRepository.prototype = {

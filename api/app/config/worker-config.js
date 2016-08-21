@@ -26,6 +26,9 @@ function configureApplication(application) {
 
   // Intercept all routes to check for API Key
   application.all('*', authority.checkForKey);
+
+  // Intercept all routes to check for API Key
+  application.all('*', authority.authenticate);
 }
 
 function configureRoutes(application) {

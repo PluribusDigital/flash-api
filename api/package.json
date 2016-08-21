@@ -12,9 +12,11 @@
     "start": "supervisor ."
   },
   "dependencies": {
+    "basic-auth": "^1.0.4",
     "body-parser": "^1.15.2",
     "express": "~4.13.4",
     "lodash": "^4.15.0",
+    "md5": "^2.1.0",
     "pg": "^6.1.0"
   },
   "devDependencies": {
