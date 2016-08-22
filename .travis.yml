@@ -2,11 +2,31 @@ language: node_js
 node_js:
   - "5.11"
 
+services:
+  - docker
+
 # command to install dependencies
 install: 
-  - cp api/app/config/db-config.js.example api/app/config/db-config.js
-  - cp api/app/config/api-config.js.example api/app/config/api-config.js
   - cd api && npm install
+  - cp app/config/db-config.js.deploy app/config/db-config.js
+  - cp app/config/api-config.js.deploy app/config/api-config.js
 
 # command to run tests
 script: npm test
+
+# build and push docker image
+after_success:
+  - ./bot.sh build  
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - ./bot.sh push
+  - cd ..
+
+deploy:
+  provider: elasticbeanstalk
+  app: flash-api
+  env: develop-flash-app-stsilabs
+  bucket_name: eb.flash-api
+  bucket_path: develop
+  zip_file: Dockerrun.aws.json
+  on:
+    branch: develop  
