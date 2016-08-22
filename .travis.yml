@@ -8,8 +8,8 @@ services:
 # command to install dependencies
 install: 
   - cd api && npm install
-  - cp app/config/db-config.js.deploy api/app/config/db-config.js
-  - cp app/config/api-config.js.deploy api/app/config/api-config.js
+  - cp app/config/db-config.js.deploy aapp/config/db-config.js
+  - cp app/config/api-config.js.deploy app/config/api-config.js
 
 # command to run tests
 script: npm test
