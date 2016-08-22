@@ -23,9 +23,8 @@ describe('UserListController Tests', function() {
 
     sinon.spy(res, "status");
 
-    userListController = proxyquire('../../../../../app/controllers/v1/users/user-list-controller', {
-      '../../../services/users/user-list-service': serviceMocks
-    });
+    userListController = require('../../../../../app/controllers/v1/users/user-list-controller');
+    userListController.userListService_ = serviceMocks;
   });
 
   // --------------------------------------------------------------------------
@@ -38,14 +37,14 @@ describe('UserListController Tests', function() {
       done();
     });
 
-    xit('should call res.status() one time', function(done) {
+    it('should call res.status() one time', function(done) {
       userListController.get(req, res, next);
 
       expect(res.status.callCount).to.equal(1);
       done();
     });
 
-    xit('should call res.status() with 200', function(done) {
+    it('should call res.status() with 200', function(done) {
       userListController.get(req, res, next);
 
       expect(res.status.calledWith(200)).to.equal(true);

@@ -6,16 +6,14 @@ describe('UserRepository Tests', function() {
   // Mocks
 
   var dbMocks = {
-    pool: {
-      query: function(string, fn) {
-        var data = {
-          rows: [{
-            id: 1,
-            name: "Jon Minter"
-        }]};
+    query: function(string, fn) {
+      var data = {
+        rows: [{
+          id: 1,
+          name: "Jon Minter"
+      }]};
 
-        fn(null, data);
-      }
+      fn(null, data);
     }
   };
 
@@ -34,17 +32,17 @@ describe('UserRepository Tests', function() {
   describe('getUserData()', function() {
 
     it('should get a list of users', function(done) {
-      userRepository.getUserList(true, function(users) {
+      userRepository.getUserList(null, function(users) {
         expect(users.length).to.be.greaterThan(0);
         done();
       });
     });
 
-    xit('should get a single user', function(done) {
-      var user = userRepository.getUser(1);
-      expect(user).to.deep.equal({id: 1, name: "Jon Minter"});
-      done();
-      pending('Not Currently Implemented');
+    it('should get a single user', function(done) {
+      userRepository.getUser('gwashington', null, function(user) {
+        expect(user).to.deep.equal({id: 1, name: "Jon Minter"});
+        done();
+      });
     });
 
   });

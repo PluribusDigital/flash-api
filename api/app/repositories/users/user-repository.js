@@ -5,13 +5,13 @@ function UserRepository() {
 }
 
 function getUserList(apiRepresentation, callback) {
-  db.pool.query('SELECT ' + params(apiRepresentation) + ' FROM users', function (err, result) {
+  db.query('SELECT ' + params(apiRepresentation) + ' FROM users', function (err, result) {
     callback(result.rows);
   });
 }
 
 function getUser(username, apiRepresentation, callback) {
-  db.pool.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = \'' + username + '\'', function (err, result) {
+  db.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = \'' + username + '\'', function (err, result) {
     callback(result.rows[0])
   });
 }
