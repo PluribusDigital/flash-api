@@ -6,7 +6,7 @@ function Authority() {
 }
 
 const AUTH_MISSING_STRING = "You must provide an API Key and Authorization before accessing our service."
-const AUTH_ERROR_STRING   = "Authentication Failed It Deployed";
+const AUTH_ERROR_STRING   = "Authentication Failed";
 
 function checkForKey(req, res, next) {
   if( req.query.api_key == undefined ) {
