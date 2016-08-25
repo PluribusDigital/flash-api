@@ -12,6 +12,7 @@
     "start": "supervisor ."
   },
   "dependencies": {
+    "assert": "^1.4.1",
     "basic-auth": "^1.0.4",
     "body-parser": "^1.15.2",
     "express": "~4.13.4",
