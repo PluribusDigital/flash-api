@@ -21,7 +21,7 @@ function checkForKey(req, res, next) {
 }
 
 function authenticate(req, res, next) {
-  var userRepository_ = require('../repositories/users/user-repository');
+  var userRepository_ = require('../users/repository');
   var credentials = auth(req);
   var apiRepresentation = false;
 
@@ -30,7 +30,7 @@ function authenticate(req, res, next) {
   }
   else if(credentials != null) {
     console.log(JSON.stringify(credentials));
-    userRepository_.getUser(credentials.name, apiRepresentation, function(user) {
+    userRepository_.get(credentials.name, apiRepresentation, function(user) {
       if(user != null && md5(credentials.pass.toLowerCase()) == user.password) {
         next();
       } else {

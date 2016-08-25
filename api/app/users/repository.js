@@ -1,16 +1,16 @@
 var _ = require('lodash');
-var db = require('../../config/db-config');
+var db = require('../config/db-config');
 
-function UserRepository() {
+function Repository() {
 }
 
-function getUserList(apiRepresentation, callback) {
+function getList(apiRepresentation, callback) {
   db.query('SELECT ' + params(apiRepresentation) + ' FROM users', function (err, result) {
     callback(result.rows);
   });
 }
 
-function getUser(username, apiRepresentation, callback) {
+function get(username, apiRepresentation, callback) {
   db.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = \'' + username + '\'', function (err, result) {
     callback(result.rows[0])
   });
@@ -26,11 +26,11 @@ function params(apiRepresentation) {
   return retVal;
 }
 
-UserRepository.prototype = {
-    getUserList: getUserList,
-    getUser: getUser
+Repository.prototype = {
+    getList: getList,
+    get: get
 };
 
-var userRepository = new UserRepository();
+var repository = new Repository();
 
-module.exports = userRepository;
+module.exports = repository;

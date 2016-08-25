@@ -1,10 +1,10 @@
 
-function UserListController() {
-  this.userListService_ = require('../../../services/users/users-service');
+function ListController() {
+  this.repository = require('./repository');
 }
 
 function get(req, res, next) {
-  this.userListService_.lookupUserList(function(userList) {
+  this.repository.getList(null, function(userList) {
     var response = {
         meta: {
           params: {},
@@ -17,10 +17,10 @@ function get(req, res, next) {
   });
 }
 
-UserListController.prototype = {
+ListController.prototype = {
   get: get
 };
 
-var userListController = new UserListController();
+var listController = new ListController();
 
-module.exports = userListController;
+module.exports = listController;
