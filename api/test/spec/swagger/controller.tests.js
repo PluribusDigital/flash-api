@@ -32,19 +32,7 @@ describe('Swagger Controller Tests', function() {
       done();
     });
 
-    it('should call res.status() one time', function(done) {
-      target.get(req, res, next);
 
-      expect(res.status.callCount).to.equal(1);
-      done();
-    });
-
-    it('should call res.status() with 200', function(done) {
-        target.get(req, res, next);
-
-      expect(res.status.calledWith(200)).to.equal(true);
-      done();
-    });
 
   });
 });

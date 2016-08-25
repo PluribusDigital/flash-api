@@ -17,7 +17,6 @@ function get(callback) {
   swagger.definitions = {};
 
   var jsonSchemaList = glob.sync(path.join(__dirname, '/../../schema/**/*.json'));
-  console.log(jsonSchemaList);
 
   var jsonSchemas = {};
 
@@ -77,7 +76,7 @@ function get(callback) {
          }
        }
       }
-      console.log(jsonSchemas.user_list);
+
       callback(swagger);
 
     });
