@@ -1,4 +1,6 @@
 # flash-api
+[![Build Status](https://travis-ci.com/STSILABS/flash-api.svg?token=s8fjYespqEg1vvrpYmqn&branch=develop)](https://travis-ci.com/STSILABS/flash-api)
+
 DHS Flash Technical Challenge
 
 ## Prerequisites
