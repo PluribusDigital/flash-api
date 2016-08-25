@@ -1,10 +1,10 @@
 
-function UsersController() {
-  this.userListService_ = require('../../../services/users/users-service');
+function Controller() {
+  this.repository = require('./repository');
 }
 
 function get(req, res, next) {
-  this.userListService_.lookupUser(req.params.userid, function(user) {
+  this.repository.get(req.params.userid, null, function(user) {
     if(user == null) {
       res.status(404).send("User Not Found");
     } else {
@@ -21,10 +21,10 @@ function get(req, res, next) {
   });
 }
 
-UsersController.prototype = {
+Controller.prototype = {
   get: get
 };
 
-var usersController = new UsersController();
+var controller = new Controller();
 
-module.exports = usersController;
+module.exports = controller;

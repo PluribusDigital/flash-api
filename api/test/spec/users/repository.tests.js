@@ -1,6 +1,6 @@
 var proxyquire = require('proxyquire').noCallThru();
 
-describe('UserRepository Tests', function() {
+describe('User Repository Tests', function() {
 
   // --------------------------------------------------------------------------
   // Mocks
@@ -21,25 +21,25 @@ describe('UserRepository Tests', function() {
   // Setup
 
 
-  var userRepository;
+  var target;
 
   beforeEach(function() {
-    userRepository = proxyquire('../../../../app/repositories/users/user-repository', {
-      '../../config/db-config': dbMocks
+    target = proxyquire('../../../app/users/repository', {
+      '../config/db-config': dbMocks
     });
   });
 
-  describe('getUserData()', function() {
+  describe('get', function() {
 
     it('should get a list of users', function(done) {
-      userRepository.getUserList(null, function(users) {
+      target.getList(null, function(users) {
         expect(users.length).to.be.greaterThan(0);
         done();
       });
     });
 
     it('should get a single user', function(done) {
-      userRepository.getUser('gwashington', null, function(user) {
+      target.get('gwashington', null, function(user) {
         expect(user).to.deep.equal({id: 1, name: "Jon Minter"});
         done();
       });

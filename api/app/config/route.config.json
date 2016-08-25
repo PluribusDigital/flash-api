@@ -3,12 +3,12 @@
     {
       "route": "/v1/users/:userid",
       "method": "GET",
-      "controller": "../controllers/v1/users/users-controller"
+      "controller": "../users/controller"
     },
     {
       "route": "/v1/users",
       "method": "GET",
-      "controller": "../controllers/v1/users/user-list-controller"
+      "controller": "../users/list-controller"
     }
   ]
 }

@@ -1,18 +1,18 @@
 var proxyquire = require('proxyquire').noCallThru();
 
-describe('UserListController Tests', function() {
+describe('User List Controller Tests', function() {
 
   // --------------------------------------------------------------------------
   // Mocks
 
-  var serviceMocks = {
-    lookupUserList: function(callback) { callback({}); }
+  var repositoryMock = {
+    getList: function(apiRepresentation, callback)  { callback({}); }
   };
 
   // --------------------------------------------------------------------------
   // Setup
 
-  var userListController;
+  var target;
   var req;
   var res;
   var next;
@@ -23,8 +23,8 @@ describe('UserListController Tests', function() {
 
     sinon.spy(res, "status");
 
-    userListController = require('../../../../../app/controllers/v1/users/user-list-controller');
-    userListController.userListService_ = serviceMocks;
+    target = require('../../../app/users/list-controller');
+    target.repository = repositoryMock;
   });
 
   // --------------------------------------------------------------------------
@@ -33,19 +33,19 @@ describe('UserListController Tests', function() {
   describe('get()', function() {
 
     it('should be a function', function(done) {
-      expect(userListController.get).to.be.a('function');
+      expect(target.get).to.be.a('function');
       done();
     });
 
     it('should call res.status() one time', function(done) {
-      userListController.get(req, res, next);
+      target.get(req, res, next);
 
       expect(res.status.callCount).to.equal(1);
       done();
     });
 
     it('should call res.status() with 200', function(done) {
-      userListController.get(req, res, next);
+      target.get(req, res, next);
 
       expect(res.status.calledWith(200)).to.equal(true);
       done();

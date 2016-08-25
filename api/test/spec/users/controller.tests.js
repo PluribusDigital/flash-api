@@ -1,17 +1,17 @@
 
-describe('UsersController Tests', function() {
+describe('User Controller Tests', function() {
 
   // --------------------------------------------------------------------------
   // Mocks
 
-  var serviceMocks = {
-    lookupUser: function(id, callback) { callback({}); }
+  var repositoryMock = {
+    get: function(username, apiRepresentation, callback)  { callback({}); }
   };
 
   // --------------------------------------------------------------------------
   // Setup
 
-  var usersController;
+  var target;
   var req;
   var res;
   var next;
@@ -22,8 +22,8 @@ describe('UsersController Tests', function() {
 
     sinon.spy(res, "status");
 
-    usersController = require('../../../../../app/controllers/v1/users/users-controller');
-    usersController.userListService_ = serviceMocks;
+    target = require('../../../app/users/controller');
+    target.repository = repositoryMock;
   });
 
   // --------------------------------------------------------------------------
@@ -32,19 +32,19 @@ describe('UsersController Tests', function() {
   describe('get()', function() {
 
     it('should be a function', function(done) {
-      expect(usersController.get).to.be.a('function');
+      expect(target.get).to.be.a('function');
       done();
     });
 
     it('should call res.status() one time', function(done) {
-      usersController.get(req, res, next);
+      target.get(req, res, next);
 
       expect(res.status.callCount).to.equal(1);
       done();
     });
 
     it('should call res.status() with 200', function(done) {
-        usersController.get(req, res, next);
+        target.get(req, res, next);
 
       expect(res.status.calledWith(200)).to.equal(true);
       done();
