@@ -1,53 +1,88 @@
 var _ = require('lodash');
-var db = require('../config/db-config');
+var async = require('async');
+var path = require('path');
+var glob = require('glob');
+var $RefParser = require('json-schema-ref-parser');
 
 function Repository() {
 }
 
 function get(callback) {
-  this.swagger = {swagger: '2.0'};
-  this.swagger.info = {version: "0.0.0", title: "Flash APIs"};
-  this.swagger.tags = [];
-  this.swagger.paths = {};
-  this.swagger.definitions = {};
+  var swagger = {};
 
-  this.swagger.paths['/users'] = {};
+  swagger.swagger = '2.0';
+  swagger.info = {version: "0.0.0", title: "Flash APIs"};
+  swagger.tags = [];
+  swagger.paths = {};
+  swagger.definitions = {};
 
-  apiDocs.swagger.paths['/scheduled_jobs'] = {};
+  var jsonSchemaList = glob.sync(path.join(__dirname, '/../../schema/**/*.json'));
+  console.log(jsonSchemaList);
 
-  apiDocs.swagger.paths['/scheduled_jobs/{id}'] = {};
+  var jsonSchemas = {};
 
-  apiDocs.swagger.paths['/scheduled_jobs'].get = {
-    tags: ['jobs'],
-    summary: "Get list of scheduled_jobs",
-    description: "",
-    parameters: [
+  async.each(jsonSchemaList,
+    function (schemaFile, callback) {
+      var jsonSchemaFilePath = schemaFile;
 
-    ],
-   responses: {
-     200: {
-       description: "OK",
-       schema: jsonSchemas.scheduled_job_list_response
-     }
-   }
-  }
+      $RefParser.dereference(jsonSchemaFilePath, function (err, schema) {
+        if (err) throw new Error (err);
+        jsonSchemas[schema.name] = schema;
+        callback();
+      })
 
-  apiDocs.swagger.paths['/users'].post = {
-    tags: ['users'],
-    summary: "Get list of users",
-    description: "",
-    parameters: [
+    },
+    function (err) {
 
-    ],
-   responses: {
-     200: {
-       description: "OK",
-       schema: jsonSchemas.user_instance
-     }
-   }
-  }
+      if (err) {
+        res.status(500);
+        res.json({error: err});
+      }
 
-  callback(this.swagger);
+      swagger.paths['/users'] = {};
+      swagger.paths['/users/{username}'] = {};
+
+      swagger.paths['/users'].get = {
+        tags: ['users'],
+        summary: "Get list of users",
+        description: "",
+        parameters: [
+
+        ],
+       responses: {
+         200: {
+           description: "OK",
+           schema: jsonSchemas.user_list
+         }
+       }
+      }
+
+      swagger.paths['/users/{username}'].get = {
+        tags: ['users'],
+        summary: "Get user instance",
+        description: "",
+        parameters: [
+          {
+            name: "username",
+            in: "path",
+            description: "",
+            required: true,
+            type: "string"
+          }
+        ],
+       responses: {
+         200: {
+           description: "OK",
+           schema: jsonSchemas.user_instance
+         }
+       }
+      }
+      console.log(jsonSchemas.user_list);
+      callback(swagger);
+
+    });
+
+
 }
 
 Repository.prototype = {
