@@ -6,7 +6,7 @@ function Controller() {
 function get(req, res, next) {
 
   this.repository.get(function(swagger) {
-    swagger.hostname = req.headers.host + '/v1';
+    swagger.host = req.headers.host + '/v1';
     swagger.schemes = ["http"];
     res.status(200).json(swagger);
   });
