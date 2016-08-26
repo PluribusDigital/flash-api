@@ -4,7 +4,7 @@ function ListController() {
 }
 
 function get(req, res, next) {
-  this.repository.getList(null, function(userList) {
+  this.repository.getList(true, function(userList) {
     var response = {
         meta: {
           params: {},
