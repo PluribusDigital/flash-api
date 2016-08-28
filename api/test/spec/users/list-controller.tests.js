@@ -6,7 +6,7 @@ describe('User List Controller Tests', function() {
   // Mocks
 
   var repositoryMock = {
-    getList: function(apiRepresentation, callback)  { callback({}); }
+    getList: function(apiRepresentation, filters, callback)  { callback({}); }
   };
 
   // --------------------------------------------------------------------------

@@ -46,7 +46,13 @@ function get(callback) {
         summary: "Get list of users",
         description: "",
         parameters: [
-
+          {
+            name: "supervisor_id",
+            in: "query",
+            description: "The user ID of the supervisor to filter the list to only users supervised by this user",
+            required: false,
+            type: "integer"
+          }
         ],
        responses: {
          200: {
@@ -64,7 +70,7 @@ function get(callback) {
           {
             name: "username",
             in: "path",
-            description: "",
+            description: "The username of the user instance you are looking for",
             required: true,
             type: "string"
           }
