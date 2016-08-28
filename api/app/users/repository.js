@@ -4,8 +4,8 @@ var db = require('../config/db-config');
 function Repository() {
 }
 
-function getList(apiRepresentation, callback) {
-  db.query('SELECT ' + params(apiRepresentation) + ' FROM users', function (err, result) {
+function getList(apiRepresentation, filters, callback) {
+  db.query('SELECT ' + params(apiRepresentation) + ' FROM users' + processFilters(filters), function (err, result) {
     callback(result.rows);
   });
 }
@@ -26,9 +26,21 @@ function params(apiRepresentation) {
   return retVal;
 }
 
+function processFilters(filters) {
+  var retVal = "";
+
+  if(filters != null && filters.supervisor_id != null && !isNaN(filters.supervisor_id)) {
+      retVal += " WHERE supervisor_id = " + filters.supervisor_id;
+  }
+
+  return retVal;
+}
+
 Repository.prototype = {
     getList: getList,
-    get: get
+    get: get,
+    params: params,
+    processFilters: processFilters
 };
 
 var repository = new Repository();
