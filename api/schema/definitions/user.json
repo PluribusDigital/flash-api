@@ -23,9 +23,13 @@
     "department": {
       "type": "string",
       "description": ""
+    },
+    "role": {
+      "type": "string",
+      "description": ""
     }
   },
   "required": [
-    "username", "name", "title", "organization", "department"
+    "username", "name", "title", "organization", "department, role"
   ]
 }
