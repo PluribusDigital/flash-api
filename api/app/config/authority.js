@@ -29,7 +29,6 @@ function authenticate(req, res, next) {
     next();
   }
   else if(credentials != null) {
-    console.log(JSON.stringify(credentials));
     userRepository_.get(credentials.name, apiRepresentation, function(user) {
       if(user != null && md5(credentials.pass.toLowerCase()) == user.password) {
         next();
