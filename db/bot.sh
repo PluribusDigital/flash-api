@@ -22,6 +22,7 @@ clean() {
 
 run() {
     docker run -it -p "5432:5432" \
+    -h db \
     -v "$db_data_dir:/var/lib/postgresql/data" \
     --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
@@ -29,6 +30,7 @@ run() {
 
 run-bg() {
     docker run -d -p "5432:5432" \
+    -h db \
     -v "$db_data_dir:/var/lib/postgresql/data" \
     --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
@@ -53,6 +55,12 @@ case $1 in
         clean
         build
         ;;
+    cycle)
+        stop
+        clean
+        build && \
+        run-bg
+        ;;
     run)
         run && \
         stop
@@ -72,7 +80,7 @@ case $1 in
         stop
         ;;
     *)
-        echo "Usage: $0 {build | run | run-bg | push | stop | test}"
+        echo "Usage: $0 {build | cycle | run | run-bg | push | stop | test}"
         exit 2
         ;;
 esac
