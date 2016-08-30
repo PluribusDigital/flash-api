@@ -8,5 +8,5 @@ CREATE TABLE kudos (
   description   VARCHAR(5000) not null,
   from_id       INTEGER REFERENCES users (id),
   to_id         INTEGER REFERENCES users (id),
-  recorded      TIMESTAMP with time zone default now(),
+  recorded      TIMESTAMP with time zone default now()
 );
