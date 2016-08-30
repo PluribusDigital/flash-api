@@ -21,6 +21,7 @@ clean() {
 run() {
     docker run -it -p "8080:8080" \
     --env-file /home/vagrant/.env \
+    --link flash-api-db:db \
     --name "$image_name" "$docker_tag"
 }
 
