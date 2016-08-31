@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var routeConfig = require('./route-config');
 var settingsConfig = require('./settings/settings-config');
 var authority = require('./authority');
+var versionPathRegex = /^\/v\d+\/.+/;
 
 function configureWorker(application) {
   configureApplication(application);
@@ -30,11 +31,11 @@ function configureApplication(application) {
     next();
   });
 
-  // Intercept all routes to check for API Key
-  application.all('*', authority.checkForKey);
+  // Intercept all routes (except swagger docs) to check for API Key
+  application.all(versionPathRegex, authority.checkForKey);
 
-  // Intercept all routes to check for API Key
-  application.all('*', authority.authenticate);
+  // Intercept all routes (except swagger docs) to check for API Key
+  application.all(versionPathRegex, authority.authenticate);
 }
 
 function configureRoutes(application) {
