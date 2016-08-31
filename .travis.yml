@@ -1,7 +1,3 @@
-env:
-  - ENV_NAME=develop
-  - EB_ENV_NAME=develop-flash-app-stsilabs
-
 language: node_js
 node_js:
   - "5.11"
@@ -28,9 +24,9 @@ after_success:
 deploy:
   provider: elasticbeanstalk
   app: flash-api
-  env: $EB_ENV_NAME
+  env: develop-flash-app-stsilabs
   bucket_name: eb.flash-api
-  bucket_path: $ENV_NAME
+  bucket_path: develop
   zip_file: Dockerrun.aws.json
   on:
     branch: develop  
