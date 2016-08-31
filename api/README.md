@@ -32,7 +32,7 @@ You can use the generator to create new controllers, repositories and services a
 |`push`| pushes the current image to [Dockerhub](https://hub.docker.com/r/stsilabs/) |
 |`stop`| stops the api server container |
 |`test`| (_not implemented_) tests the api |
-
+|`nuke`| destroy __all__ images and containers |
 
 ## API Application configuration
 
