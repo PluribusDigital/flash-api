@@ -8,32 +8,43 @@
 image_name=flash-api
 docker_tag="stsilabs/$image_name"
 
+docker_host_db=db
+image_name_db=flash-api-db
+
 # -----------------------------------------------------------------------------
 
 build() {
-    docker build -t "$docker_tag" .
+    docker build -t "$docker_tag" ~/api
 }
 
 clean() {
     docker rmi $(docker images -f "dangling=true" -q)
 }
 
+nuke() {
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -a -q)
+}
+
 run() {
     docker run -it -p "8080:8080" \
     --env-file /home/vagrant/.env \
-    --link flash-api-db:db \
+    --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag"
 }
 
 run-bg() {
     docker run -d -p "8080:8080" \
     --env-file /home/vagrant/.env \
+    --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag"
 }
 
 run-test() {
     docker run -it -p "8080:8080" \
     --env-file /home/vagrant/.env \
+    --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag" npm test
 }
 
@@ -51,6 +62,9 @@ case $1 in
     build)
         clean
         build
+        ;;
+    nuke)
+        nuke
         ;;
     run)
         clean

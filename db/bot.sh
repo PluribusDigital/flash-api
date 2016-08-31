@@ -9,20 +9,28 @@ image_name=flash-api-db
 docker_tag="stsilabs/$image_name"
 db_data_dir=/var/lib/postgresql/flash-data
 
+docker_host_db=db
+
 # -----------------------------------------------------------------------------
 
 build() {
     sudo rm -rf "$db_data_dir"
-    docker build -t "$docker_tag" .
+    docker build -t "$docker_tag" ~/db
 }
 
 clean() {
     docker rmi $(docker images -f "dangling=true" -q)
 }
 
+nuke() {
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -a -q)
+}
+
 run() {
     docker run -it -p "5432:5432" \
-    -h db \
+    -h "$docker_host_db" \
     -v "$db_data_dir:/var/lib/postgresql/data" \
     --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
@@ -30,7 +38,7 @@ run() {
 
 run-bg() {
     docker run -d -p "5432:5432" \
-    -h db \
+    -h "$docker_host_db" \
     -v "$db_data_dir:/var/lib/postgresql/data" \
     --env-file /home/vagrant/.env \
     --name "$image_name" "$docker_tag"
@@ -60,6 +68,9 @@ case $1 in
         clean
         build && \
         run-bg
+        ;;
+    nuke)
+        nuke
         ;;
     run)
         run && \
