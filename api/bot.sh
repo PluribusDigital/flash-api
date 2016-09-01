@@ -14,7 +14,8 @@ image_name_db=flash-api-db
 # -----------------------------------------------------------------------------
 
 build() {
-    docker build -t "$docker_tag" ~/api
+    docker build -t "$docker_tag" "$HOME/api"
+    return $?
 }
 
 clean() {
@@ -32,6 +33,7 @@ run() {
     --env-file /home/vagrant/.env \
     --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag"
+    return $?
 }
 
 run-bg() {
@@ -46,10 +48,18 @@ run-test() {
     --env-file /home/vagrant/.env \
     --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag" npm test
+    return $?
 }
 
 push() {
-    docker push "$docker_tag"
+    if [ -z "$1" ]
+    then
+        docker push "$docker_tag"
+    else
+        docker tag "$docker_tag" "$docker_tag:$1"        
+        docker push "$docker_tag:$1"
+    fi
+    return $?
 }
 
 stop() {
@@ -80,7 +90,7 @@ case $1 in
     push)
         clean
         build && \
-        push
+        push $2
         ;;
     stop)
         stop
