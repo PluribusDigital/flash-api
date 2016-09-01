@@ -5,7 +5,7 @@
     "Key": "develop"
   },
   "Image": {
-    "Name": "stsilabs/flash-api",
+    "Name": "stsilabs/flash-api:develop",
     "Update": "true"
   },
   "Authentication": {
