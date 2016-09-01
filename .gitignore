@@ -13,6 +13,9 @@ node_modules
 # Don/t store credentials
 .env
 
+# Don/t store code coverage files
+/api/coverage
+
 # Configuration files
 /api/app/config/api-config.js
 /api/app/config/db-config.js
