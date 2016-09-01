@@ -1,5 +1,7 @@
 # flash-api
 [![Build Status](https://travis-ci.com/STSILABS/flash-api.svg?token=s8fjYespqEg1vvrpYmqn&branch=develop)](https://travis-ci.com/STSILABS/flash-api)
+[![Code Climate](https://codeclimate.com/repos/57c7583910729e4fe2000668/badges/7a7a81592fe216a1ddc7/gpa.svg)](https://codeclimate.com/repos/57c7583910729e4fe2000668/feed)
+[![Test Coverage](https://codeclimate.com/repos/57c7583910729e4fe2000668/badges/7a7a81592fe216a1ddc7/coverage.svg)](https://codeclimate.com/repos/57c7583910729e4fe2000668/coverage)
 
 DHS Flash Technical Challenge
 
@@ -50,4 +52,3 @@ There are two areas being developed in this repository.  The development guidanc
 ## Database
 If you want to connect via PGAdmin, here are example connection settings.
 ![PG Admin Configuration](/docs/pgAdminConfig.png?raw=true "PGAdmin Configuration")
-
