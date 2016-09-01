@@ -14,7 +14,7 @@ image_name_db=flash-api-db
 # -----------------------------------------------------------------------------
 
 build() {
-    docker build -t "$docker_tag" "$HOME/api"
+    docker build -t "$docker_tag" .
     return $?
 }
 
