@@ -5,7 +5,7 @@ function Controller() {
 
 function get(req, res, next) {
   this.repository.get(req.params.userid, true, function(user) {
-    if(user == null) {
+    if(user === null) {
       res.status(404).send("User Not Found");
     } else {
       var response = {

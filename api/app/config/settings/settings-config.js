@@ -16,7 +16,7 @@ function initializeSettings(settings) {
 function createEnvironmentSettings(settings) {
   settings.environment = process.env.ENV ? process.env.ENV.toLowerCase() : 'prod';
   settings.hostName = process.env.HOST ? process.env.HOST : '127.0.0.1';
-  settings.workerPort =  process.env.PORT ? parseInt(process.env.PORT) : 8080;
+  settings.workerPort =  process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 }
 
 function loadConfigSettings(settings) {

@@ -1,6 +1,7 @@
 var auth = require('basic-auth');
 var md5 = require('md5');
 var api_config = require('./api-config');
+var userRepository_ = require('../users/repository');
 
 function Authority() {
 }
@@ -9,7 +10,7 @@ const AUTH_MISSING_STRING = "You must provide an API Key and Authorization befor
 const AUTH_ERROR_STRING   = "Authentication Failed";
 
 function checkForKey(req, res, next) {
-  if( req.query.api_key == undefined ) {
+  if( req.query.api_key === undefined ) {
     res.status(401).send(AUTH_MISSING_STRING);
   }
   else if(!api_config.checkForKey(req.query.api_key)) {
@@ -21,16 +22,15 @@ function checkForKey(req, res, next) {
 }
 
 function authenticate(req, res, next) {
-  var userRepository_ = require('../users/repository');
   var credentials = auth(req);
   var apiRepresentation = false;
 
-  if(req.method == "OPTIONS") {
+  if(req.method === "OPTIONS") {
     next();
   }
-  else if(credentials != null) {
+  else if(credentials !== null) {
     userRepository_.get(credentials.name, apiRepresentation, function(user) {
-      if(user != null && md5(credentials.pass.toLowerCase()) == user.password) {
+      if(user !== null && md5(credentials.pass.toLowerCase()) === user.password) {
         next();
       } else {
         res.status(401).send(AUTH_ERROR_STRING);
@@ -46,6 +46,6 @@ Authority.prototype = {
   authenticate: authenticate
 };
 
-var Authority = new Authority();
+var authority = new Authority();
 
-module.exports = Authority;
+module.exports = authority;

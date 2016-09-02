@@ -4,10 +4,7 @@ engines:
     enabled: true
     config:
       languages:
-      - ruby
       - javascript
-      - python
-      - php
   eslint:
     enabled: true
   fixme:
@@ -24,3 +21,4 @@ ratings:
 exclude_paths:
 - db/
 - api/migrations
+- api/test

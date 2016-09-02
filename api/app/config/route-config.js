@@ -66,19 +66,16 @@ function getMethod(routeItem) {
   if(!routeItem || !routeItem.method || routeItem.method.length === 0) {
     throw 'Undefined or empty "method" property in "lib/config/route.config.json"';
   }
-
   var method = routeItem.method.toLowerCase();
-
-  switch(method) {
-    case 'get':
-    case 'put':
-    case 'post':
-    case 'delete':
-      return method;
-      break;
-    default:
-      throw 'Invalid REST "method" property in "lib/config/route.config.json": ' + method;
+  if(!allowedMethod(method)){
+    throw 'Invalid REST "method" property in "lib/config/route.config.json": ' + method;
   }
+  return method;
+}
+
+function allowedMethod(method) {
+  var allowedMethods = /^(get|put|post|delete)$/;
+  return null !== method.match(allowedMethods);
 }
 
 function getAction(routeItem) {
@@ -87,7 +84,6 @@ function getAction(routeItem) {
   }
   return routeItem.action;
 }
-
 
 function registerRoute(application, controller, route, method, action) {
   application.route(route)[method](function(req, res, next) {
