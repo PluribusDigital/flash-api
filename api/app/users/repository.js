@@ -29,7 +29,7 @@ function params(apiRepresentation) {
 function processFilters(filters) {
   var retVal = "";
 
-  if(filters != null && filters.supervisor_id != null && !isNaN(filters.supervisor_id)) {
+  if(filters !== null && filters.supervisor_id !== null && !isNaN(filters.supervisor_id)) {
       retVal += " WHERE supervisor_id = " + filters.supervisor_id;
   }
 

@@ -1,6 +1,7 @@
 var auth = require('basic-auth');
 var md5 = require('md5');
 var api_config = require('./api-config');
+var userRepository_ = require('../users/repository');
 
 function Authority() {
 }
@@ -21,16 +22,15 @@ function checkForKey(req, res, next) {
 }
 
 function authenticate(req, res, next) {
-  var userRepository_ = require('../users/repository');
   var credentials = auth(req);
   var apiRepresentation = false;
 
   if(req.method === "OPTIONS") {
     next();
   }
-  else if(credentials != null) {
+  else if(credentials !== null) {
     userRepository_.get(credentials.name, apiRepresentation, function(user) {
-      if(user != null && md5(credentials.pass.toLowerCase()) == user.password) {
+      if(user !== null && md5(credentials.pass.toLowerCase()) === user.password) {
         next();
       } else {
         res.status(401).send(AUTH_ERROR_STRING);
