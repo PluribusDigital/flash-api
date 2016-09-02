@@ -9,7 +9,7 @@ const AUTH_MISSING_STRING = "You must provide an API Key and Authorization befor
 const AUTH_ERROR_STRING   = "Authentication Failed";
 
 function checkForKey(req, res, next) {
-  if( req.query.api_key == undefined ) {
+  if( req.query.api_key === undefined ) {
     res.status(401).send(AUTH_MISSING_STRING);
   }
   else if(!api_config.checkForKey(req.query.api_key)) {
@@ -25,7 +25,7 @@ function authenticate(req, res, next) {
   var credentials = auth(req);
   var apiRepresentation = false;
 
-  if(req.method == "OPTIONS") {
+  if(req.method === "OPTIONS") {
     next();
   }
   else if(credentials != null) {
@@ -46,6 +46,6 @@ Authority.prototype = {
   authenticate: authenticate
 };
 
-var Authority = new Authority();
+var authority = new Authority();
 
-module.exports = Authority;
+module.exports = authority;
