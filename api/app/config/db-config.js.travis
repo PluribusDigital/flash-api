@@ -4,7 +4,7 @@ var pg = require('pg');
 // Database
 
 var config = {
-  database: 'flash-api',
+  database: 'travis',
   host: 'localhost',
   user: 'postgres',
   password: '',

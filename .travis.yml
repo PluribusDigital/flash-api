@@ -15,7 +15,7 @@ install:
 # commands to run before tests
 before_script:
   - npm install -g codeclimate-test-reporter
-  - psql -c 'create database flash_api' -U postgres
+  - psql -c 'create database travis' -U postgres
   - ./node_modules/.bin/db-migrate up
 
 # command to run tests
