@@ -1,6 +1,9 @@
 
 function ListController() {
   this.repository = require('./repository');
+  this.repository.getList(true, null, function(userList) {
+    console.log(userList);
+  });
 }
 
 function get(req, res, next) {
