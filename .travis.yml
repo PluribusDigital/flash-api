@@ -8,15 +8,16 @@ services:
 
 # command to install dependencies
 install:
+  - source ./env.travis
   - cd api && npm install
-  - cp app/config/db-config.js.travis app/config/db-config.js
+  - cp app/config/db-config.js.deploy app/config/db-config.js
   - cp app/config/api-config.js.deploy app/config/api-config.js
 
 # commands to run before tests
 before_script:
   - npm install -g codeclimate-test-reporter
-  - psql -c 'create database travis' -U postgres
-  - ./node_modules/.bin/db-migrate up -e travis
+  - psql -c 'create database travis_ci_test' -U postgres
+  - ./node_modules/.bin/db-migrate up
 
 # command to run tests
 script: npm run test-coverage
