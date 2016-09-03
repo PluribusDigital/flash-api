@@ -19,7 +19,7 @@ describe('Authentication', function() {
 
   beforeEach(function() {
     req = { query: {} };
-    res = { status: function(code) { return { send: function(obj) {} }} };
+    res = { status: function(code) { return { json: function(obj) { error: obj} }} };
     next = sinon.spy();
 
     sinon.spy(res, "status");

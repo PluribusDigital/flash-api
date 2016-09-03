@@ -7,7 +7,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "test-coverage": "istanbul cover --include-all-sources _mocha -- -R spec",
+    "test-coverage": "./node_modules/.bin/istanbul cover -x 'migrations/**' ./node_modules/.bin/_mocha -- -R spec",
     "install-local": "npm install -g mocha & npm install -g node-inspector & npm install -g yo & npm install -g generator-express-rest-api & npm install",
     "start": "supervisor ."
   },

@@ -11,10 +11,10 @@ const AUTH_ERROR_STRING   = "Authentication Failed";
 
 function checkForKey(req, res, next) {
   if( req.query.api_key === undefined ) {
-    res.status(401).send(AUTH_MISSING_STRING);
+    res.status(401).json({ error: AUTH_MISSING_STRING });
   }
   else if(!api_config.checkForKey(req.query.api_key)) {
-    res.status(401).send(AUTH_ERROR_STRING);
+    res.status(401).json({ error: AUTH_MISSING_STRING });
   }
   else {
     next();
