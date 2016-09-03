@@ -13,6 +13,10 @@ var config = {
   idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
 };
 
+console.log("Database: " + config.database);
+console.log("DBUser: " + config.user);
+console.log("DBPass: " + config.password);
+
 var pool = new pg.Pool(config);
 
 pool.on('error', function (err, client) {
