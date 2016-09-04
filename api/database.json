@@ -1,6 +1,6 @@
 {
   "defaultEnv": "flash-db",
-  
+
   "flash-db": {
     "driver": "pg",
     "user": {"ENV": "POSTGRES_USER"},

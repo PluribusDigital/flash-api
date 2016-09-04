@@ -54,3 +54,4 @@ function startServer(application) {
 }
 
 configureWorker(application);
+module.exports = application;

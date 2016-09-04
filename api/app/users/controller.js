@@ -1,12 +1,11 @@
+var userRepository = require('./repository');
 
-function Controller() {
-  this.repository = require('./repository');
-}
+function Controller() {}
 
 function get(req, res, next) {
-  this.repository.get(req.params.userid, true, function(user) {
-    if(user === null) {
-      res.status(404).send("User Not Found");
+  userRepository.get(req.params.userid, true, function(user) {
+    if(user === undefined) {
+      res.status(404).json({ error: "User Not Found" });
     } else {
       var response = {
           meta: {
