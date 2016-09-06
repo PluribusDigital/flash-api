@@ -5,7 +5,7 @@
     "Key": "develop"
   },
   "Image": {
-    "Name": "stsilabs/flash-api:develop",
+    "Name": "stsilabs/flash-api:FLASH_API_DOCKER_TAG",
     "Update": "true"
   },
   "Authentication": {
