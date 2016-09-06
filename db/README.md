@@ -18,11 +18,11 @@ During `vagrant up`, the database server is "started" by running `./bot.sh run-b
 
 ## Updating the database
 
-Start here -> [db-migrate documentation](https://db-migrate.readthedocs.io/en/latest/Getting%20Started/usage/)
+For more information on the DB Migration scheme used for this project, check this out -> [db-migrate documentation](https://db-migrate.readthedocs.io/en/latest/Getting%20Started/usage/)
 
-1. `cd ../api`
-1. `./node_modules/db-migrate/bin/db-migrate create <name>`
-1. Modify `./migrations/sqls/<date>-<name>-up.sql`
-1. Modify `./migrations/sqls/<date>-<name>-down.sql`
-1. (_rarely_) Modify the Javascript file `./migrations/<date>-<name>.js`
-1. `./node_modules/db-migrate/bin/db-migrate up`
+1. `cd ../api` (assuming you are starting in the `./db` directory)
+1. Create a new migration using the following command: `./node_modules/db-migrate/bin/db-migrate create <name>`
+1. Modify the migration script with your favorite editor at `./migrations/sqls/<date>-<name>-up.sql`
+1. Modify the migration rollback script with your favorite editor at `./migrations/sqls/<date>-<name>-down.sql`
+1. (_rarely_) Modify the Javascript file with your favorite editor at `./migrations/<date>-<name>.js`
+1. Execute the migrations using the following command: `./node_modules/db-migrate/bin/db-migrate up`
