@@ -38,6 +38,7 @@ deploy:
     bucket_name: eb.flash-api
     bucket_path: develop
     zip_file: Dockerrun.aws.json
+    skip_cleanup: true
     on:
       branch: develop
   - provider: elasticbeanstalk
@@ -46,6 +47,7 @@ deploy:
     bucket_name: eb.flash-api
     bucket_path: master
     zip_file: Dockerrun.aws.json
+    skip_cleanup: true
     on:
       branch: master
 notifications:
