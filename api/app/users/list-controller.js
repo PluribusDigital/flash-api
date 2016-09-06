@@ -1,3 +1,4 @@
+var meta = require('../meta/controller');
 
 function ListController() {
   this.repository = require('./repository');
@@ -6,11 +7,7 @@ function ListController() {
 function get(req, res, next) {
   this.repository.getList(true, req.query, function(userList) {
     var response = {
-        meta: {
-          params: {},
-          user: "TBD",
-          date: new Date()
-        },
+        meta: meta.get(req),
         data: userList
     }
     res.status(200).json(response);

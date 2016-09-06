@@ -22,7 +22,7 @@ function checkForKey(req, res, next) {
 }
 
 function authenticate(req, res, next) {
-  var credentials = auth(req);
+  var credentials = getCredentials(req);
   var apiRepresentation = false;
 
   if(req.method === "OPTIONS") {
@@ -41,9 +41,14 @@ function authenticate(req, res, next) {
   }
 }
 
+function getCredentials(req) {
+  return auth(req);
+}
+
 Authority.prototype = {
   checkForKey: checkForKey,
-  authenticate: authenticate
+  authenticate: authenticate,
+  getCredentials: getCredentials
 };
 
 var authority = new Authority();
