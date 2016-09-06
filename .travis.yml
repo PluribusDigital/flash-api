@@ -31,11 +31,27 @@ after_success:
   - cd ..
 
 deploy:
-  provider: elasticbeanstalk
-  app: flash-api
-  env: develop-flash-app-stsilabs
-  bucket_name: eb.flash-api
-  bucket_path: develop
-  zip_file: Dockerrun.aws.json
-  on:
-    branch: develop
+  - provider: elasticbeanstalk
+    app: flash-api
+    env: develop-flash-app-stsilabs
+    bucket_name: eb.flash-api
+    bucket_path: develop
+    zip_file: Dockerrun.aws.json
+    on:
+      branch: develop
+  - provider: elasticbeanstalk
+    app: flash-api
+    env: stage-flash-app-stsilabs
+    bucket_name: eb.flash-api
+    bucket_path: stage
+    zip_file: Dockerrun.aws.json
+    on:
+      branch: stage
+  - provider: elasticbeanstalk
+    app: flash-api
+    env: prod-flash-app-stsilabs
+    bucket_name: eb.flash-api
+    bucket_path: prod
+    zip_file: Dockerrun.aws.json
+    on:
+      branch: master
