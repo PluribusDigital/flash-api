@@ -15,7 +15,7 @@ docker_host_db=db
 
 build() {
     sudo rm -rf "$db_data_dir"
-    docker build -t "$docker_tag" ~/db
+    docker build -t "$docker_tag" .
 }
 
 clean() {
