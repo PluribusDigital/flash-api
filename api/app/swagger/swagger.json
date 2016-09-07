@@ -278,6 +278,9 @@
         "date_given": {
           "type": "string"
         },
+        "title": {
+          "type": "string"
+        },
         "description_of_conduct": {
           "type": "string"
         },
@@ -302,6 +305,9 @@
           "format": "int64"
         },
         "date_given": {
+          "type": "string"
+        },
+        "title": {
           "type": "string"
         },
         "description_of_conduct": {
