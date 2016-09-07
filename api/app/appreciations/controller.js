@@ -27,7 +27,6 @@ function post(req,res,next) {
     var apprecObj = {};
     apprecObj.from_user = req.body.from_user;
     apprecObj.to_user = req.body.to_user;
-    apprecObj.to_user = req.body.to_user;
     apprecObj.date_given = req.body.date_given;
     apprecObj.title = req.body.title;
     apprecObj.description_of_conduct = req.body.description_of_conduct;
