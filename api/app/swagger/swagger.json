@@ -84,6 +84,145 @@
           }
         }
       }
+    },
+    "/appreciations": {
+      "get": {
+        "tags": [
+          "appreciations"
+        ],
+        "summary": "Get list of appreciations",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Appreciation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "appreciations"
+        ],
+        "summary": "Create a new appreciation",
+        "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AppreciationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Appreciation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appreciations/{id}": {
+      "get": {
+        "tags": [
+          "appreciations"
+        ],
+        "summary": "Get appreciation instance",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the appreciation instance you are looking for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "$ref": "#/definitions/Appreciation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "appreciations"
+        ],
+        "summary": "Update an existing appreciation",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the appreciation instance you are updating",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AppreciationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Appreciation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -117,6 +256,68 @@
         "role": {
           "type": "string",
           "description": ""
+        }
+      }
+    },
+    "Appreciation": {
+      "type": "object",
+      "description": "Appreciation",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "to_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "date_given": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description_of_conduct": {
+          "type": "string"
+        },
+        "positive_effect_on_others": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "AppreciationPost": {
+      "type": "object",
+      "description": "Appreciation Post Body",
+      "properties": {
+        "from_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "to_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "date_given": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description_of_conduct": {
+          "type": "string"
+        },
+        "positive_effect_on_others": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
         }
       }
     }
