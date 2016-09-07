@@ -20,7 +20,7 @@ function params(apiRepresentation) {
   var retVal = "*";
 
   if(apiRepresentation) {
-      retVal = "username, name, title, organization, department, role, supervisor_id";
+      retVal = "id, username, name, title, organization, department, role, supervisor_id";
   }
 
   return retVal;
