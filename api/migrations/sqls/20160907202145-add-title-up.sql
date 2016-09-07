@@ -1,0 +1,1 @@
+ALTER TABLE appreciation ADD COLUMN title VARCHAR(80) not null;
