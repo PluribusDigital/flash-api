@@ -112,6 +112,40 @@
           }
         }
       }
+    },
+    "/appreciations/{id}": {
+      "get": {
+        "tags": [
+          "appreciations"
+        ],
+        "summary": "Get appreciation instance",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the appreciation instance you are looking for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "$ref": "#/definitions/Appreciation"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
