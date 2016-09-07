@@ -85,7 +85,36 @@
           }
         }
       }
-    }
+    },
+    "/appreciations": {
+      "get": {
+        "tags": [
+          "appreciations"
+        ],
+        "summary": "Get list of appreciations",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Appreciation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "definitions": {
     "Meta": {
@@ -118,6 +147,36 @@
         "role": {
           "type": "string",
           "description": ""
+        }
+      }
+    },
+    "Appreciation": {
+      "type": "object",
+      "description": "Appreciation",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "to_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "date_given": {
+          "type": "string"
+        },
+        "description_of_conduct": {
+          "type": "string"
+        },
+        "positive_effect_on_others": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
         }
       }
     }
