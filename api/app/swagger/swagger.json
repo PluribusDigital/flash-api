@@ -92,7 +92,6 @@
         ],
         "summary": "Get list of appreciations",
         "description": "",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -113,7 +112,7 @@
           }
         }
       }
-    },
+    }
   },
   "definitions": {
     "Meta": {
