@@ -4,6 +4,7 @@ describe('Swagger Request Tests', function() {
     .get('/v1/')
     .end(function(err, res) {
       expect(res).to.have.status(200);
+      expect(res).to.be.json;
       done();
     });
   });

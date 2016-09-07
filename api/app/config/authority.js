@@ -30,7 +30,7 @@ function authenticate(req, res, next) {
   }
   else if(credentials !== null) {
     userRepository_.get(credentials.name, apiRepresentation, function(user) {
-      if(user !== null && md5(credentials.pass.toLowerCase()) === user.password) {
+      if(user !== undefined && md5(credentials.pass.toLowerCase()) === user.password) {
         next();
       } else {
         res.status(401).json({ error: AUTH_ERROR_STRING });
