@@ -29,6 +29,7 @@ after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - ./bot.sh push "$TRAVIS_BRANCH"
   - cd ..
+  - sed -i -e "s/FLASH_API_DOCKER_TAG/$TRAVIS_BRANCH/" Dockerrun.aws.json
 
 deploy:
   - provider: elasticbeanstalk
@@ -37,21 +38,19 @@ deploy:
     bucket_name: eb.flash-api
     bucket_path: develop
     zip_file: Dockerrun.aws.json
+    skip_cleanup: true
     on:
       branch: develop
   - provider: elasticbeanstalk
     app: flash-api
-    env: stage-flash-app-stsilabs
-    bucket_name: eb.flash-api
-    bucket_path: stage
-    zip_file: Dockerrun.aws.json
-    on:
-      branch: stage
-  - provider: elasticbeanstalk
-    app: flash-api
     env: prod-flash-app-stsilabs
     bucket_name: eb.flash-api
-    bucket_path: prod
+    bucket_path: master
     zip_file: Dockerrun.aws.json
+    skip_cleanup: true
     on:
       branch: master
+notifications:
+  slack:
+    secure: 5Yaac6r5j5PFZ9n5T+GyFGVcZwDkrK18WaLsZtjG0MBSWM8IKc8dS/nbUlE6/aTGuJ286vpcCWAYcoiWHMk5vvl2NdenHOc0vRLwnK7xH3zH7mk4eYYiU2FDybfk1Undqui6Bcn0QEm4aqynw0qGJLm73USW6H61oMQDaXKAqrW5f8clQnLsB4CPPRnqL573J0fPOOU16oe4oqAF5JIdLwqa/b5yC7mTpgyiiPD6bW0nsPY3sKASeJE5ohHTFSMFxDEDb9PYFrJ3I5ycdqRg/dOj7W5yjFDx1VhJSm4ni3A11mtYJnv2+AUcvnPeCNErpy9bgyqvV6zLLTYdw2J3eb5ITn33AGfXdSI/9d85LU7gfMVpmxIrNNRZGPeeT5Bb2x15hU842sMCx54Yv1OeNZAJ/jJc69uULdFzSK6r+O02Pepa359sMI0QlQVI2radMdv1RFL+1+4QyKjMDLTftxNIGttzRhdToFfQE3uvBuX9UwRLrGSllalHvNyiJFJ6luyoqZvsrZyBWKSFZo4scui0a7/twxCrFKX3maD7hDhg2X4uNVnZie0Ws0sPHFuGeUETmEqEY0+y2BNF56/8/iBdvQFw0mz1qx8CZTU95jU/ruzkH+cEZjTGoeP5AS01YOejEToK+GnFFdgd/J8uinHF3Qds6S8cuNFg0S5WZ0s=
+    
