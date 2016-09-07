@@ -41,6 +41,10 @@ describe('User Request Tests', function() {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res.body.data).to.be.a('array');
+        expect(res.body.meta).to.be.a('object');
+        expect(res.body.meta.params.api_key).to.equal(apiKey);
+        expect(res.body.meta.user).to.equal('gwashington');
+        expect(res.body.meta.date).to.not.be.null;
         done();
       });
     });
@@ -55,6 +59,10 @@ describe('User Request Tests', function() {
         expect(res).to.be.json;
         expect(res.body.data).to.be.a('object');
         expect(res.body.data.username).to.equal('gwashington');
+        expect(res.body.meta).to.be.a('object');
+        expect(res.body.meta.params.api_key).to.equal(apiKey);
+        expect(res.body.meta.user).to.equal('gwashington');
+        expect(res.body.meta.date).to.not.be.null;
         done();
       });
     });
