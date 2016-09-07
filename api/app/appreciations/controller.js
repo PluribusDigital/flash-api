@@ -15,7 +15,7 @@ function get(req, res, next) {
           meta: meta.get(req),
           data: apprec
       }
-      res.status(200).json(apprec);
+      res.status(200).json(response);
     }
   });
 
@@ -36,8 +36,7 @@ function post(req,res,next) {
       if (err) {
         res.status(500).json(err);
       } else {
-        console.log(response);
-        res.status(200).json({"id": response.rows[0].id, "message": "appreciation successfully created"});
+        res.status(201).json({"id": response.rows[0].id, "message": "appreciation successfully created"});
       }
     });
 
