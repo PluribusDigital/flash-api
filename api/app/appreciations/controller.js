@@ -22,7 +22,6 @@ function get(req, res, next) {
 };
 
 function post(req,res,next) {
-  console.log(req.body);
 
     var apprecObj = {};
     apprecObj.from_user = req.body.from_user;
@@ -33,18 +32,34 @@ function post(req,res,next) {
     apprecObj.positive_effect_on_others = req.body.positive_effect_on_others;
     apprecObj.status = req.body.status;
 
-    appreciationsRepository.post(apprecObj, true, function(err, response) {
+    appreciationsRepository.post(apprecObj, function(err, response) {
       if (err) {
         res.status(500).json(err);
       } else {
-        res.status(200).json(response);
+        console.log(response);
+        res.status(200).json({"id": response.rows[0].id, "message": "appreciation successfully created"});
       }
     });
 
   };
 
   function put(req,res,next) {
-    res.status(200).json({put:'put'});
+    var apprecObj = {};
+    apprecObj.from_user = req.body.from_user;
+    apprecObj.to_user = req.body.to_user;
+    apprecObj.date_given = req.body.date_given;
+    apprecObj.title = req.body.title;
+    apprecObj.description_of_conduct = req.body.description_of_conduct;
+    apprecObj.positive_effect_on_others = req.body.positive_effect_on_others;
+    apprecObj.status = req.body.status;
+
+    appreciationsRepository.put(req.params.apprecid, apprecObj, function(err, response) {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.status(200).json({"message": "appreciation has been successfully updated"});
+      }
+    });
   };
 
 Controller.prototype = {
