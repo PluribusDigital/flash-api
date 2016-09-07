@@ -12,7 +12,6 @@ function getList(apiRepresentation, filters, callback) {
 
 function get(username, apiRepresentation, callback) {
   db.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = \'' + username + '\'', function (err, result) {
-    console.log(result);
     callback(result.rows[0])
   });
 }
