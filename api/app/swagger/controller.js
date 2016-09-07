@@ -1,16 +1,8 @@
-
-function Controller() {
-  this.repository = require('./repository');
-}
+function Controller() {}
 
 function get(req, res, next) {
-
-  this.repository.get(function(swagger) {
-    swagger.host = req.headers.host + '/v1';
-    swagger.schemes = ["http"];
-    res.status(200).json(swagger);
-  });
-
+  var swagger = require('./swagger');
+  res.status(200).json(swagger);
 }
 
 Controller.prototype = {
@@ -18,5 +10,4 @@ Controller.prototype = {
 };
 
 var controller = new Controller();
-
 module.exports = controller;
