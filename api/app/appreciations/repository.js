@@ -26,13 +26,34 @@ function post (apprecObj, callback) {
   sql = sql + '\'' + apprecObj.positive_effect_on_others + '\',';
   sql = sql + '\'' + apprecObj.status + '\',';
   sql = sql + '\'' + apprecObj.title + '\'';
-  sql = sql + ')';
+  sql = sql + ') RETURNING id';
 
   db.query(sql, function (err, result) {
     if (err) {
       callback(err);
     } else {
-      callback(result);
+      callback(null, result);
+    }
+  });
+
+}
+
+function put (id, apprecObj, callback) {
+
+  var sql = 'UPDATE appreciation SET ';
+  sql += 'from_user = \'' + apprecObj.from_user + '\',' ;
+  sql += 'to_user = \'' + apprecObj.to_user + '\',' ;
+  sql += 'date_given = \'' + apprecObj.date_given + '\',' ;
+  sql += 'description_of_conduct = \'' + apprecObj.description_of_conduct + '\',' ;
+  sql += 'positive_effect_on_others = \'' + apprecObj.positive_effect_on_others + '\',' ;
+  sql += 'status = \'' + apprecObj.status + '\'' ;
+  sql += ' WHERE id = \'' + id + '\'';
+
+  db.query(sql, function (err, result) {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, result);
     }
   });
 
@@ -65,6 +86,7 @@ Repository.prototype = {
     getList: getList,
     get: get,
     post: post,
+    put: put,
     params: params,
     processFilters: processFilters
 };
