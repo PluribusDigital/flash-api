@@ -14,6 +14,26 @@
       "route": "/v1/users",
       "method": "GET",
       "controller": "../users/list-controller"
+    },
+    {
+      "route": "/v1/appreciations",
+      "method": "GET",
+      "controller": "../appreciations/list-controller"
+    },
+    {
+      "route": "/v1/appreciations/:apprecid",
+      "method": "GET",
+      "controller": "../appreciations/controller"
+    },
+    {
+      "route": "/v1/appreciations",
+      "method": "POST",
+      "controller": "../appreciations/controller"
+    },
+    {
+      "route": "/v1/appreciations/:apprecid",
+      "method": "PUT",
+      "controller": "../appreciations/controller"
     }
   ]
 }
