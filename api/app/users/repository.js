@@ -24,7 +24,7 @@ function get(username, apiRepresentation, callback) {
 function create(user, apiRepresentation, callback) {
   db.query("INSERT INTO users (" + insertFields() + ") VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING " + params(apiRepresentation), [user.username, user.password, user.name, user.email, user.title, user.organization, user.department, user.role, user.supervisor_id], function (err, result) {
     if(err){
-      callback(undefined);
+      return callback(undefined);
     }
     callback(result.rows[0]);
   });
@@ -33,7 +33,7 @@ function create(user, apiRepresentation, callback) {
 function update(user, apiRepresentation, callback) {
   db.query("UPDATE users SET " + updateFields() + " WHERE id=$8 RETURNING " + params(apiRepresentation), [user.username, user.name, user.title, user.organization, user.department, user.role, user.supervisor_id, user.id], function (err, result) {
     if(err){
-      callback(undefined);
+      return callback(undefined);
     }
     callback(result.rows[0]);
   });
@@ -42,7 +42,7 @@ function update(user, apiRepresentation, callback) {
 function destroy(id, callback) {
   db.query("DELETE FROM users WHERE id=$1 RETURNING id", [id], function (err, result) {
     if(err){
-      callback(undefined);
+      return callback(undefined);
     }
     callback(result.rows[0]);
   });
