@@ -42,7 +42,6 @@ function update(user, apiRepresentation, callback) {
 function destroy(id, callback) {
   db.query("DELETE FROM users WHERE id=$1 RETURNING id", [id], function (err, result) {
     if(err){
-      console.log(err);
       return callback(undefined);
     }
     callback(result.rows[0]);
