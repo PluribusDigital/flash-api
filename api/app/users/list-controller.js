@@ -14,10 +14,24 @@ function get(req, res, next) {
   });
 }
 
+function post(req, res, next) {
+  this.repository.create(req.body, true, function(user) {
+    if(undefined === user) {
+      res.status(400).json({ error: "Unable to create user" });
+    } else {
+      var response = {
+          meta: meta.get(req),
+          data: user
+      }
+      res.status(201).json(response);
+    }
+  });
+}
+
 ListController.prototype = {
-  get: get
+  get: get,
+  post: post
 };
 
 var listController = new ListController();
-
 module.exports = listController;
