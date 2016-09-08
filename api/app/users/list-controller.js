@@ -19,5 +19,4 @@ ListController.prototype = {
 };
 
 var listController = new ListController();
-
 module.exports = listController;

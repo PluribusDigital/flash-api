@@ -5,7 +5,7 @@ function Controller() {}
 
 function get(req, res, next) {
   userRepository.get(req.params.userid, true, function(user) {
-    if(user === undefined) {
+    if(undefined === user) {
       res.status(404).json({ error: "User Not Found" });
     } else {
       var response = {
@@ -22,5 +22,4 @@ Controller.prototype = {
 };
 
 var controller = new Controller();
-
 module.exports = controller;

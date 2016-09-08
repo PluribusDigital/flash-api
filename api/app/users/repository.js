@@ -1,19 +1,44 @@
 var _ = require('lodash');
 var db = require('../config/db-config');
 
-function Repository() {
-}
+function Repository() {}
 
 function getList(apiRepresentation, filters, callback) {
   db.query('SELECT ' + params(apiRepresentation) + ' FROM users' + processFilters(filters), function (err, result) {
-    callback(result.rows);
+    null === err ? callback(result.rows) : callback([]);
   });
 }
 
 function get(username, apiRepresentation, callback) {
-  db.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = \'' + username + '\'', function (err, result) {
-    callback(result.rows[0])
+  db.query('SELECT ' + params(apiRepresentation) + ' FROM users WHERE username = $1', [username], function (err, result) {
+    null === err ? callback(result.rows[0]) : callback(undefined);
   });
+}
+
+function create(user, apiRepresentation, callback) {
+  db.query("INSERT INTO users (" + insertFields() + ") VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING " + params(apiRepresentation), [user.username, user.password, user.name, user.email, user.title, user.organization, user.department, user.role, user.supervisor_id], function (err, result) {
+    null === err ? callback(result.rows[0]) : callback(undefined);
+  });
+}
+
+function update(user, apiRepresentation, callback) {
+  db.query("UPDATE users SET " + updateFields() + " WHERE id=$8 RETURNING " + params(apiRepresentation), [user.username, user.name, user.title, user.organization, user.department, user.role, user.supervisor_id, user.id], function (err, result) {
+    null === err ? callback(result.rows[0]) : callback(undefined);
+  });
+}
+
+function destroy(id, callback) {
+  db.query("DELETE FROM users WHERE id=$1 RETURNING id", [id], function (err, result) {
+    null === err ? callback(result.rows[0]) : callback(undefined);
+  });
+}
+
+function insertFields(){
+  return "username, password, name, email, title, organization, department, role, supervisor_id";
+}
+
+function updateFields(){
+  return "username=$1, name=$2, title=$3, organization=$4, department=$5, role=$6, supervisor_id=$7";
 }
 
 function params(apiRepresentation) {
@@ -39,6 +64,9 @@ function processFilters(filters) {
 Repository.prototype = {
     getList: getList,
     get: get,
+    create: create,
+    update: update,
+    destroy: destroy,
     params: params,
     processFilters: processFilters
 };

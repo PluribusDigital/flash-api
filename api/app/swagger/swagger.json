@@ -9,9 +9,6 @@
   "produces": [
     "application/json"
   ],
-  "schemes": [
-    "https"
-  ],
   "tags": [],
   "paths": {
     "/users": {
