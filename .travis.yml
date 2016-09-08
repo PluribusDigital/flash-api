@@ -6,6 +6,11 @@ services:
   - docker
   - postgresql
 
+branches:
+  only:
+  - master
+  - develop
+
 # command to install dependencies
 install:
   - source ./.env.travis
