@@ -35,7 +35,7 @@ vagrant up
 # Start the http server
 host> vagrant ssh
 # password is 'vagrant'
-guest> api/bot.sh run
+guest> cd api && ./bot.sh run
 ```
 * Validate that API's are up and running by making a `GET` request to `http://192.168.50.10:8080/v1/users`.  This should produce an error if no credentials are being passed with the request.  Example error below:
 
