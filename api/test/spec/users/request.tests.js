@@ -1,4 +1,10 @@
 describe('User Request Tests', function() {
+  var userRepository;
+
+  beforeEach(function() {
+    userRepository = require('../../../app/users/repository');
+  });
+
   describe('when non authorized', function () {
     it ('GET /v1/users should return 401', function (done) {
       chai.request(server)
@@ -37,6 +43,16 @@ describe('User Request Tests', function() {
         done();
       });
     });
+
+    it ('DELETE /v1/users/:username should return 401', function (done) {
+      chai.request(server)
+      .delete('/v1/users/someuser')
+      .send({})
+      .end(function(err, res) {
+        expect(res).to.have.status(401);
+        done();
+      });
+    });
   });
 
   describe('when authorized', function () {
@@ -53,7 +69,7 @@ describe('User Request Tests', function() {
         password: 'george1'
       };
       newUserData = {
-        username: 'newUser',
+        username: 'newuser',
         password: 'asdfasdfasdf',
         name: 'New User',
         email: 'new.user@example.com',
@@ -139,6 +155,21 @@ describe('User Request Tests', function() {
       .send(newUserData)
       .end(function(err, res) {
         expect(res).to.have.status(201);
+        expect(res.body.data).to.be.a('object');
+        expect(res.body.data.username).to.eql('newuser');
+        done();
+        userRepository.destroy(res.body.data.id, function(result){});
+      });
+    });
+
+    it ('PUT /v1/users/:username should return 404 when user not found', function (done) {
+      chai.request(server)
+      .put('/v1/users/fakeuser')
+      .auth(user.username, user.password)
+      .query({api_key: apiKey})
+      .send({})
+      .end(function(err, res) {
+        expect(res).to.have.status(404);
         done();
       });
     });
@@ -156,15 +187,42 @@ describe('User Request Tests', function() {
     });
 
     it ('PUT /v1/users/:username should return 200 on success', function (done) {
+      userRepository.create(newUserData, true, function(newUser){
+        chai.request(server)
+        .put('/v1/users/' + newUser.username)
+        .auth(user.username, user.password)
+        .query({api_key: apiKey})
+        .send(updateUserData)
+        .end(function(err, res) {
+          expect(res).to.have.status(200);
+          expect(res.body.data.name).to.eql('Updated User');
+          done();
+          userRepository.destroy(res.body.data.id, function(result){});
+        });
+      });
+    });
+
+    it ('DELETE /v1/users/:username should return 404 when user not found', function (done) {
       chai.request(server)
-      .put('/v1/users/tjefferson')
+      .delete('/v1/users/fakeuser')
       .auth(user.username, user.password)
       .query({api_key: apiKey})
-      .send(updateUserData)
       .end(function(err, res) {
-        expect(res).to.have.status(200);
-        expect(res.body.data.name).to.eql('Updated User');
+        expect(res).to.have.status(404);
         done();
+      });
+    });
+
+    it ('DELETE /v1/users/:username should return 204 on success', function (done) {
+      userRepository.create(newUserData, true, function(newUser){
+        chai.request(server)
+        .delete('/v1/users/' + newUser.username)
+        .auth(user.username, user.password)
+        .query({api_key: apiKey})
+        .end(function(err, res) {
+          expect(res).to.have.status(204);
+          done();
+        });
       });
     });
   });

@@ -38,9 +38,26 @@ function put(req, res, next) {
   });
 }
 
+function destroy(req, res, next) {
+  userRepository.get(req.params.userid, true, function(user) {
+    if(undefined === user) {
+      res.status(404).json({ error: "User Not Found" });
+    } else {
+      userRepository.destroy(user.id, function(result) {
+        if(undefined === result) {
+          res.status(400).json({ error: "Unable to Delete User" });
+        } else {
+          res.status(204).send({});
+        }
+      });
+    }
+  });
+}
+
 Controller.prototype = {
   get: get,
-  put: put
+  put: put,
+  delete: destroy
 };
 
 var controller = new Controller();

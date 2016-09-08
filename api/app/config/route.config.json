@@ -16,6 +16,11 @@
       "controller": "../users/controller"
     },
     {
+      "route": "/v1/users/:userid",
+      "method": "DELETE",
+      "controller": "../users/controller"
+    },
+    {
       "route": "/v1/users",
       "method": "GET",
       "controller": "../users/list-controller"

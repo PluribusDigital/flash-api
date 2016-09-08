@@ -64,13 +64,13 @@ describe('User Repository Tests', function() {
         expect(user).to.be.a('object');
         expect(user.name).to.eql('Test User');
         done();
+        userRepository.destroy(user.id, function(result){});
       });
     });
   });
 
   describe('update', function(){
     var updateData;
-    var testUser;
 
     beforeEach(function() {
       updateData = {
@@ -98,6 +98,7 @@ describe('User Repository Tests', function() {
           expect(updatedUser).to.be.a('object');
           expect(updatedUser.name).to.eql('Test User Updated');
           done();
+          userRepository.destroy(updatedUser.id, function(result){});
         });
       });
     });
