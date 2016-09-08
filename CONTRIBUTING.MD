@@ -8,8 +8,12 @@ This guideline is designed to organize and make contribution changes run as smoo
 
 #### Making Changes
 
-* Create a new branch.  It should be named after a feature or issue
-  * `git checkout -b new-branch-name`
+All development done for this repository should follow the principles outlined in the [gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
+
+![gitflow Diagram](https://www.atlassian.com/git/images/tutorials/collaborating/comparing-workflows/gitflow-workflow/01.svg)
+
+* Create a feature branch off of the `develop` branch (typically, though not always). The name of the feature branch should be `feature/<NAME_OF_FEATURE>` (for example `feature/login-rework`).
+  * `git checkout -b new-branch-name origin/develop`
   
 * Make your changes and commit to local machine
   * `git add .` : More info on [git add](https://git-scm.com/docs/git-add)
@@ -18,20 +22,16 @@ This guideline is designed to organize and make contribution changes run as smoo
   **NOTE:** Follow the guideline for [writing good commit](http://chris.beams.io/posts/git-commit/) message
   * Make sure your tests pass!
   
-#### Pull in Main Branch
-  * `git pull origin master`
+#### Pull in Develop Branch
+  * `git pull origin develop`
   * If necessary, resolve [Merge Conflicts](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/)
   
 #### Push Changes
-  * Push your changes the new-branch-name in your fork of the repository.
+  * Push your changes to the new-branch-name in the remote repository.
   * `git push -u origin new-branch-name`: More info on [git push](https://git-scm.com/docs/git-push)
   
 #### Pull Request
   * Using Github.com UI, submit the new-branch-name pull request.
-  * Wait for Approval
+  * If the pull request closes a Github issue, please include "Closes #<ISSUE_NUM>" in the pull request message for automatic closing of the issue.  More information on [Closing Github issues automatically](https://help.github.com/articles/closing-issues-via-commit-messages/)
+  * Wait for Peer review and Approval
   * More information on [Pull Request](https://help.github.com/articles/using-pull-requests/)
-  
-  
-  **NOTE:** Request code Review e.g slack channel, discussion, comments
-   * Pull Request message guidance (Closing issues in waffle.io)
-   * e.g. `git commit -m "closes #104"`

@@ -1,0 +1,24 @@
+function APIConfig() {
+}
+
+// All Valid keys should be added to the array below
+var valid_keys = [
+  // Insert keys here, ex: '<INSERT KEY HERE>'
+];
+
+function checkForKey(key) {
+  return (valid_keys.indexOf(key) > -1)
+}
+
+function getValidKey() {
+  return (valid_keys.length > 0) ? valid_keys[0] : false;
+}
+
+APIConfig.prototype = {
+  checkForKey: checkForKey,
+  getValidKey: getValidKey
+};
+
+var api_config = new APIConfig();
+
+module.exports = api_config;

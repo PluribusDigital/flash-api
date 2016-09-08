@@ -10,5 +10,18 @@ node_modules
 .bash_history
 .DS_Store
 
-# Dont store credentials
+# Don/t store credentials
 .env
+
+# Don/t store code coverage files
+/api/coverage
+
+# Configuration files
+/api/app/config/api-config.js
+/api/app/config/db-config.js
+
+# IDE Specific Ignores
+.viminfo
+
+# Log Files
+npm-debug.log

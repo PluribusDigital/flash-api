@@ -1,20 +1,37 @@
 {
   "name": "flash-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "API for DHS FLASH Prototype",
   "repository": "https://github.com/STSILABS/flash-api",
   "license": "MIT",
   "main": "server.js",
   "scripts": {
-    "start": "supervisor .",
-    "test": "echo TODO"
+    "test": "mocha",
+    "test-coverage": "./node_modules/.bin/istanbul cover -x 'migrations/**' ./node_modules/.bin/_mocha -- -R spec",
+    "install-local": "npm install -g mocha & npm install -g node-inspector & npm install -g yo & npm install -g generator-express-rest-api & npm install",
+    "start": "supervisor ."
   },
   "dependencies": {
+    "assert": "^1.4.1",
+    "async": "^2.0.1",
+    "basic-auth": "^1.0.4",
     "body-parser": "^1.15.2",
+    "db-migrate": "~0.10.0-beta.15",
+    "db-migrate-pg": "^0.1.10",
     "express": "~4.13.4",
+    "glob": "^7.0.6",
+    "json-schema-ref-parser": "^3.1.2",
+    "lodash": "^4.15.0",
+    "md5": "^2.1.0",
     "pg": "^6.1.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.2",
+    "proxyquire": "^1.7.10",
+    "sinon": "^1.17.5",
     "supervisor": "^0.11.0"
   }
 }

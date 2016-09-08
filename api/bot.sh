@@ -8,36 +8,58 @@
 image_name=flash-api
 docker_tag="stsilabs/$image_name"
 
+docker_host_db=db
+image_name_db=flash-api-db
+
 # -----------------------------------------------------------------------------
 
 build() {
     docker build -t "$docker_tag" .
+    return $?
 }
 
 clean() {
     docker rmi $(docker images -f "dangling=true" -q)
 }
 
+nuke() {
+    docker stop $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -a -q)
+}
+
 run() {
     docker run -it -p "8080:8080" \
     --env-file /home/vagrant/.env \
+    --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag"
+    return $?
 }
 
 run-bg() {
     docker run -d -p "8080:8080" \
     --env-file /home/vagrant/.env \
+    --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag"
 }
 
 run-test() {
     docker run -it -p "8080:8080" \
     --env-file /home/vagrant/.env \
+    --link "$image_name_db":"$docker_host_db" \
     --name "$image_name" "$docker_tag" npm test
+    return $?
 }
 
 push() {
-    docker push "$docker_tag"
+    if [ -z "$1" ]
+    then
+        docker push "$docker_tag"
+    else
+        docker tag "$docker_tag" "$docker_tag:$1"        
+        docker push "$docker_tag:$1"
+    fi
+    return $?
 }
 
 stop() {
@@ -51,10 +73,13 @@ case $1 in
         clean
         build
         ;;
+    nuke)
+        nuke
+        ;;
     run)
         clean
         build && \
-        run && \
+        run
         stop
         ;;
     run-bg)
@@ -65,7 +90,7 @@ case $1 in
     push)
         clean
         build && \
-        push
+        push $2
         ;;
     stop)
         stop
@@ -73,7 +98,7 @@ case $1 in
     test)
         clean
         build && \
-        run-test && \
+        run-test
         stop
         ;;
     *)

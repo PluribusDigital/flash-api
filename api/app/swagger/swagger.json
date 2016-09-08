@@ -1,0 +1,121 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.0",
+    "title": "Flash APIs"
+  },
+  "host": "192.168.50.10:8080",
+  "basePath": "/v1",
+  "produces": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get list of users",
+        "description": "",
+        "parameters": [
+          {
+            "name": "supervisor_id",
+            "in": "query",
+            "description": "The user ID of the supervisor to filter the list to only users supervised by this user",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{username}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user instance",
+        "description": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "The username of the user instance you are looking for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "#/definitions/Meta"
+                },
+                "data": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Meta": {
+      "type": "object"
+    },
+    "User": {
+      "type": "object",
+      "description": "User",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "title": {
+          "type": "string",
+          "description": ""
+        },
+        "organization": {
+          "type": "string",
+          "description": ""
+        },
+        "department": {
+          "type": "string",
+          "description": ""
+        },
+        "role": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    }
+  }
+}

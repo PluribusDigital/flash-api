@@ -1,0 +1,20 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "eb.flash-api",
+    "Key": "develop"
+  },
+  "Image": {
+    "Name": "stsilabs/flash-api:FLASH_API_DOCKER_TAG",
+    "Update": "true"
+  },
+  "Authentication": {
+      "Bucket": "stsilabs-dockerhub-config",
+      "Key": "dockercfg"
+  },  
+  "Ports": [
+    {
+      "ContainerPort": "8080"
+    }
+  ]
+}
