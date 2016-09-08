@@ -17,11 +17,33 @@ describe('User Request Tests', function() {
         done();
       });
     });
+
+    it ('POST /v1/users should return 401', function (done) {
+      chai.request(server)
+      .post('/v1/users')
+      .send({})
+      .end(function(err, res) {
+        expect(res).to.have.status(401);
+        done();
+      });
+    });
+
+    it ('PUT /v1/users/:username should return 401', function (done) {
+      chai.request(server)
+      .post('/v1/users/someuser')
+      .send({})
+      .end(function(err, res) {
+        expect(res).to.have.status(401);
+        done();
+      });
+    });
   });
 
   describe('when authorized', function () {
     var apiKey;
     var user;
+    var newUserData;
+    var updateUserData;
 
     beforeEach(function(){
       var apiConfig = require('../../../app/config/api-config');
@@ -29,7 +51,26 @@ describe('User Request Tests', function() {
       user = {
         username: 'gwashington',
         password: 'george1'
-      }
+      };
+      newUserData = {
+        username: 'newUser',
+        password: 'asdfasdfasdf',
+        name: 'New User',
+        email: 'new.user@example.com',
+        title: 'New Title',
+        organization: 'New Org',
+        department: 'New Dept',
+        role: 'New Supervisor',
+        supervisor_id: null
+      };
+      updateUserData = {
+        name: 'Updated User',
+        title: 'Updated Title',
+        organization: 'Updated Org',
+        department: 'Updated Dept',
+        role: 'Updated Supervisor',
+        supervisor_id: null
+      };
     });
 
     it ('GET /v1/users should return list of users', function (done) {
@@ -74,6 +115,55 @@ describe('User Request Tests', function() {
       .query({api_key: apiKey})
       .end(function(err, res) {
         expect(res).to.have.status(404);
+        done();
+      });
+    });
+
+    it ('POST /v1/users should return 400 on error', function (done) {
+      chai.request(server)
+      .post('/v1/users')
+      .auth(user.username, user.password)
+      .query({api_key: apiKey})
+      .send({})
+      .end(function(err, res) {
+        expect(res).to.have.status(400);
+        done();
+      });
+    });
+
+    it ('POST /v1/users should return 201 on success', function (done) {
+      chai.request(server)
+      .post('/v1/users')
+      .auth(user.username, user.password)
+      .query({api_key: apiKey})
+      .send(newUserData)
+      .end(function(err, res) {
+        expect(res).to.have.status(201);
+        done();
+      });
+    });
+
+    it ('PUT /v1/users/:username should return 400 on error', function (done) {
+      chai.request(server)
+      .put('/v1/users/tjefferson')
+      .auth(user.username, user.password)
+      .query({api_key: apiKey})
+      .send({})
+      .end(function(err, res) {
+        expect(res).to.have.status(400);
+        done();
+      });
+    });
+
+    it ('PUT /v1/users/:username should return 200 on success', function (done) {
+      chai.request(server)
+      .put('/v1/users/tjefferson')
+      .auth(user.username, user.password)
+      .query({api_key: apiKey})
+      .send(updateUserData)
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(res.body.data.name).to.eql('Updated User');
         done();
       });
     });

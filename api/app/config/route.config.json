@@ -11,8 +11,18 @@
       "controller": "../users/controller"
     },
     {
+      "route": "/v1/users/:userid",
+      "method": "PUT",
+      "controller": "../users/controller"
+    },
+    {
       "route": "/v1/users",
       "method": "GET",
+      "controller": "../users/list-controller"
+    },
+    {
+      "route": "/v1/users",
+      "method": "POST",
       "controller": "../users/list-controller"
     }
   ]

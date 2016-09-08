@@ -75,7 +75,6 @@ describe('User Repository Tests', function() {
     beforeEach(function() {
       updateData = {
         id: null,
-        username: 'testuserupdated',
         name: 'Test User Updated',
         title: 'Test Title Updated',
         organization: 'Test Org Updated',

@@ -17,8 +17,30 @@ function get(req, res, next) {
   });
 }
 
+function put(req, res, next) {
+  userRepository.get(req.params.userid, true, function(user) {
+    if(undefined === user) {
+      res.status(404).json({ error: "User Not Found" });
+    } else {
+      req.body.id = user.id;
+      userRepository.update(req.body, true, function(updatedUser) {
+        if(undefined === updatedUser) {
+          res.status(400).json({ error: "Unable to Update User" });
+        } else {
+          var response = {
+              meta: meta.get(req),
+              data: updatedUser
+          }
+          res.status(200).json(response);
+        }
+      });
+    }
+  });
+}
+
 Controller.prototype = {
-  get: get
+  get: get,
+  put: put
 };
 
 var controller = new Controller();
