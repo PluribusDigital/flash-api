@@ -31,7 +31,7 @@ function create(user, apiRepresentation, callback) {
 }
 
 function update(user, apiRepresentation, callback) {
-  db.query("UPDATE users SET " + updateFields() + " WHERE id=$7 RETURNING " + params(apiRepresentation), [user.name, user.title, user.organization, user.department, user.role, user.supervisor_id, user.id], function (err, result) {
+  db.query("UPDATE users SET " + updateFields() + " WHERE id=$8 RETURNING " + params(apiRepresentation), [user.name, user.email, user.title, user.organization, user.department, user.role, user.supervisor_id, user.id], function (err, result) {
     if(err){
       return callback(undefined);
     }
@@ -53,14 +53,14 @@ function insertFields(){
 }
 
 function updateFields(){
-  return "name=$1, title=$2, organization=$3, department=$4, role=$5, supervisor_id=$6";
+  return "name=$1, email=$2, title=$3, organization=$4, department=$5, role=$6, supervisor_id=$7";
 }
 
 function params(apiRepresentation) {
   var retVal = "*";
 
   if(apiRepresentation) {
-    retVal = "id, username, name, title, organization, department, role, supervisor_id";
+    retVal = "id, username, name, email, title, organization, department, role, supervisor_id";
   }
 
   return retVal;

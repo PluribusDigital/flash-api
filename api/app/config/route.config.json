@@ -29,6 +29,21 @@
       "route": "/v1/users",
       "method": "POST",
       "controller": "../users/list-controller"
+    },
+    {
+      "route": "/v1/kudos",
+      "method": "GET",
+      "controller": "../kudos/list-controller"
+    },
+    {
+      "route": "/v1/kudos/:kudosid",
+      "method": "GET",
+      "controller": "../kudos/controller"
+    },
+    {
+      "route": "/v1/kudos",
+      "method": "POST",
+      "controller": "../kudos/list-controller"
     }
   ]
 }
