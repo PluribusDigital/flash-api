@@ -81,6 +81,7 @@ describe('User Request Tests', function() {
       };
       updateUserData = {
         name: 'Updated User',
+        email: 'updated@example.com',
         title: 'Updated Title',
         organization: 'Updated Org',
         department: 'Updated Dept',

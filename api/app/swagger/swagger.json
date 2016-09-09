@@ -1,121 +1,335 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "0.0.0",
-    "title": "Flash APIs"
-  },
-  "host": "192.168.50.10:8080",
-  "basePath": "/v1",
-  "produces": [
-    "application/json"
-  ],
-  "tags": [],
-  "paths": {
-    "/users": {
-      "get": {
-        "tags": [
-          "users"
-        ],
-        "summary": "Get list of users",
-        "description": "",
-        "parameters": [
-          {
-            "name": "supervisor_id",
-            "in": "query",
-            "description": "The user ID of the supervisor to filter the list to only users supervised by this user",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/Meta"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/User"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.0",
+        "title": "Flash APIs"
     },
-    "/users/{username}": {
-      "get": {
-        "tags": [
-          "users"
-        ],
-        "summary": "Get user instance",
-        "description": "",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "The username of the user instance you are looking for",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "meta": {
-                  "$ref": "#/definitions/Meta"
-                },
-                "data": {
-                  "$ref": "#/definitions/User"
+    "host": "192.168.50.10:8080",
+    "basePath": "/v1",
+    "produces": [
+        "application/json"
+    ],
+    "tags": [],
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get list of users",
+                "parameters": [
+                    {
+                        "name": "supervisor_id",
+                        "in": "query",
+                        "description": "The user ID of the supervisor to filter the list to only users supervised by this user",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta": {
+                                    "$ref": "#/definitions/Meta"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
+            },
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/UserPost"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta": {
+                                    "$ref": "#/definitions/Meta"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BAD REQUEST",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
-          }
+        },
+        "/users/{username}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user instance",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The username of the user instance you are looking for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta": {
+                                    "$ref": "#/definitions/Meta"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update user instance",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The username of the user instance you are updating",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/UserPut"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta": {
+                                    "$ref": "#/definitions/Meta"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BAD REQUEST",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete user instance",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The username of the user instance you are deleting",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "DELETED"
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
-      }
-    }
-  },
-  "definitions": {
-    "Meta": {
-      "type": "object"
     },
-    "User": {
-      "type": "object",
-      "description": "User",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": ""
+    "definitions": {
+        "Meta": {
+            "type": "object"
         },
-        "name": {
-          "type": "string",
-          "description": ""
+        "Error": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
         },
-        "title": {
-          "type": "string",
-          "description": ""
+        "User": {
+            "type": "object",
+            "description": "User",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "supervisor_id": {
+                    "type": "integer"
+                }
+            }
         },
-        "organization": {
-          "type": "string",
-          "description": ""
+        "UserPost": {
+            "type": "object",
+            "description": "UserPost",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "supervisor_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "username",
+                "password",
+                "name",
+                "email",
+                "title",
+                "organization",
+                "department",
+                "role",
+                "supervisor_id"
+            ]
         },
-        "department": {
-          "type": "string",
-          "description": ""
-        },
-        "role": {
-          "type": "string",
-          "description": ""
+        "UserPut": {
+            "type": "object",
+            "description": "UserPut",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "supervisor_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name",
+                "email",
+                "title",
+                "organization",
+                "department",
+                "role",
+                "supervisor_id"
+            ]
         }
-      }
     }
-  }
 }
