@@ -36,7 +36,7 @@
       "controller": "../kudos/list-controller"
     },
     {
-      "route": "/v1/kudos",
+      "route": "/v1/kudos/:kudosid",
       "method": "GET",
       "controller": "../kudos/controller"
     },
