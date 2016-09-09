@@ -203,6 +203,74 @@
                     }
                 }
             }
+        },
+        "/kudos": {
+            "get": {
+                "tags": [
+                    "kudos"
+                ],
+                "summary": "Get list of kudos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta": {
+                                    "$ref": "#/definitions/Meta"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Kudo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "kudos"
+                ],
+                "summary": "Create a new kudo",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/KudoPost"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta": {
+                                    "$ref": "#/definitions/Meta"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Kudo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "BAD REQUEST",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -216,6 +284,55 @@
                     "type": "string"
                 }
             }
+        },
+        "Kudo": {
+            "type": "object",
+            "description": "Kudo",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nominee": {
+                    "type": "integer"
+                },
+                "nominator": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "KudoPost": {
+            "type": "object",
+            "description": "KudoPost",
+            "properties": {
+                "nominee": {
+                    "type": "integer"
+                },
+                "nominator": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "nominee",
+                "nominator",
+                "category",
+                "comment"
+            ]
         },
         "User": {
             "type": "object",
