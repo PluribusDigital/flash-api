@@ -76,6 +76,7 @@ describe('User Repository Tests', function() {
       updateData = {
         id: null,
         name: 'Test User Updated',
+        email: 'updated@example.com',
         title: 'Test Title Updated',
         organization: 'Test Org Updated',
         department: 'Test Dept Updated',
