@@ -15,13 +15,13 @@ function get(req, res, next) {
 }
 
 function post(req, res, next) {
-  this.repository.create(req.body, true, function(kudos) {
-    if(undefined === kudos) {
-      res.status(400).json({ error: "Unable to create kudos" });
+  this.repository.create(req.body, true, function(kudosResult) {
+    if(undefined === kudosResult) {
+      res.status(400).json({ error: "Unable to create kudo" });
     } else {
       var response = {
           meta: meta.get(req),
-          data: kudos
+          data: kudosResult
       }
       res.status(201).json(response);
     }

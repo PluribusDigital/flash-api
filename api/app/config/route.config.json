@@ -43,7 +43,7 @@
     {
       "route": "/v1/kudos",
       "method": "POST",
-      "controller": "../kudos/controller"
+      "controller": "../kudos/list-controller"
     }
   ]
 }

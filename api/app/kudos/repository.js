@@ -21,12 +21,20 @@ function get(id, apiRepresentation, callback) {
   });
 }
 
-function create(kudos, apiRepresentation, callback) {
+function create(kudo, apiRepresentation, callback) {
 
   db.query("INSERT INTO kudo (" + insertFields() + ") VALUES($1, $2, $3, $4, now()) RETURNING " + params(apiRepresentation),
-   [kudos.nominee, kudos.nominator, kudos.category, kudos.comment], function (err, result) {
+   [kudo.nominee, kudo.nominator, kudo.category, kudo.comment], function (err, result) {
     if(err){
+      return callback(undefined);
+    }
+    callback(result.rows[0]);
+  });
+}
 
+function destroy(id, callback) {
+  db.query("DELETE FROM kudo WHERE id=$1 RETURNING id", [id], function (err, result) {
+    if(err){
       return callback(undefined);
     }
     callback(result.rows[0]);
@@ -58,6 +66,7 @@ Repository.prototype = {
     getList: getList,
     get: get,
     create: create,
+    destroy: destroy,
     params: params
 };
 
