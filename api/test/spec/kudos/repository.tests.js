@@ -1,4 +1,4 @@
-describe('User Repository Tests', function() {
+describe('Kudos Repository Tests', function() {
   var kudoRepository;
   var kudoData;
 
