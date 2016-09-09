@@ -17,27 +17,8 @@ function get(req, res, next) {
   });
 }
 
-
-function post(req, res, next) {
-
-  kudosRepository.create(req.body, true, function(kudosResult) {
-    if(undefined === kudosResult) {
-      res.status(400).json({ error: "Unable to create kudos" });
-    } else {
-      var response = {
-          meta: meta.get(req),
-          data: kudosResult
-      }
-      res.status(200).json(response);
-    }
-  });
-
-}
-
-
 Controller.prototype = {
-  get: get,
-  post: post
+  get: get
 };
 
 var controller = new Controller();
