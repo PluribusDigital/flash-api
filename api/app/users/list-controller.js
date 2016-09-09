@@ -1,6 +1,6 @@
 var meta = require('../meta/controller');
 var _ = require('lodash');
-var base64 = require('base-64');
+var md5 = require('md5');
 
 function ListController() {
   this.repository = require('./repository');
@@ -29,7 +29,7 @@ function post(req, res, next) {
   }
 
   if (!_.has(req.body,'password')) {
-    req.body.password = base64.encode(req.body.username + ':kudos');
+    req.body.password = md5('kudos');
   }
 
   respository.get(req.body.username, true, function(user) {
